@@ -1,0 +1,22 @@
+{
+  "name": "f2e-2nd",
+  "version": "1.0.0",
+  "description": "The F2E 2nd Challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laidasan/F2E-2nd.git"
+  },
+  "author": "Yuri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laidasan/F2E-2nd/issues"
+  },
+  "homepage": "https://github.com/laidasan/F2E-2nd#readme",
+  "devDependencies": {
+    "node-sass": "^4.13.1"
+  }
+}
