@@ -1,0 +1,29 @@
+.btn {
+    &,
+    &:link,
+    &:visited {
+        display: inline-block;
+        text-decoration: none;
+        color: #666;
+    }
+
+    &--form {
+        text-transform: uppercase;
+        padding: 1.5rem 0;
+        margin-top: 3rem;
+        border: none;
+        border-radius: 1rem;
+        background: $color-primary;
+        font-size: 24px;
+        color: $color-white;
+
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+        &-1col {
+            width: 100%;
+        }
+    }
+}

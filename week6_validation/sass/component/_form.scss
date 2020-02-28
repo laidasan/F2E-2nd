@@ -1,0 +1,33 @@
+.form {
+    max-width: 510px;
+    max-width: 600px;
+    margin: auto;
+    font-size: 0;
+    &-group {
+        margin-bottom: 2.4rem;
+    }
+    &__label {
+        display: inline-block;
+        font-size: 2.1rem;
+        margin-bottom: .6rem;
+    }
+    &__input {
+        display: block;
+        font-size: 21px;
+        padding: 1.2rem 0 1.2rem 1.5rem;
+        width: calc(100% - 1.5rem);
+        border: none;
+        border-radius: .6rem;
+        box-shadow: 0 0 0 .15rem #000 ;
+    }
+
+
+
+    // layout
+    &--1col {
+
+    }
+    &--2col {
+
+    }
+}

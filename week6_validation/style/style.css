@@ -1,0 +1,104 @@
+html {
+  font-size: 62.5%; }
+
+.heading-primary {
+  font-size: 51px;
+  font-weight: 600; }
+
+.heading-secondary {
+  font-size: 42px;
+  font-weight: 600; }
+
+.heading-thread {
+  font-size: 30px;
+  font-size: 500; }
+
+.u-text-center {
+  text-align: center; }
+
+.u-margin-bottom--mid {
+  margin-bottom: 21px; }
+
+.btn, .btn:link, .btn:visited {
+  display: inline-block;
+  text-decoration: none;
+  color: #666; }
+
+.btn--form {
+  text-transform: uppercase;
+  padding: 1.5rem 0;
+  margin-top: 3rem;
+  border: none;
+  border-radius: 1rem;
+  background: #BEE1FF;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer; }
+  .btn--form:focus {
+    outline: none; }
+  .btn--form-1col {
+    width: 100%; }
+
+.form {
+  max-width: 510px;
+  max-width: 600px;
+  margin: auto;
+  font-size: 0; }
+  .form-group {
+    margin-bottom: 2.4rem; }
+  .form__label {
+    display: inline-block;
+    font-size: 2.1rem;
+    margin-bottom: .6rem; }
+  .form__input {
+    display: block;
+    font-size: 21px;
+    padding: 1.2rem 0 1.2rem 1.5rem;
+    width: calc(100% - 1.5rem);
+    border: none;
+    border-radius: .6rem;
+    box-shadow: 0 0 0 .15rem #000; }
+
+.process {
+  font-size: 0;
+  padding: 3rem 0;
+  margin: 0 30%; }
+  .process__circle {
+    display: inline-block;
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0.18rem #BEE1FF;
+    background: #fff; }
+    .process__circle:not(:last-child) {
+      margin-right: calc((100% - 6rem) / 3); }
+      .process__circle:not(:last-child)::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto 0;
+        width: 0;
+        height: 0;
+        padding: .1rem 6.3rem;
+        z-index: -1; }
+    .process__circle::before {
+      background: #BEE1FF; }
+  .process--checkin {
+    box-shadow: 0 0 0 0.18rem #0275DB; }
+    .process--checkin::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: .9rem;
+      height: .9rem;
+      border-radius: 50%;
+      margin: auto;
+      background: #0275DB; }
+    .process--checkin::before {
+      background: #0275DB; }

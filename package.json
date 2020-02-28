@@ -4,7 +4,10 @@
   "description": "The F2E 2nd Challenge",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "node-sass week6_validation/sass/main.scss week6_validation/style/style.css -w",
+    "startserver": "node week6_validation/server/main.js",
+    "start": "concurrently \"npm run watch\"  \"npm run startserver\""
   },
   "repository": {
     "type": "git",
