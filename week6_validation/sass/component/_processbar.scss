@@ -2,44 +2,55 @@
     font-size: 0;
     padding: 3rem 0;
     margin: 0 30%;
+    white-space: nowrap;
     &__circle {
         display: inline-block;
         position: relative;
-        width: 1.5rem;
-        height: 1.5rem;
-        border-radius: 50%;
-        box-shadow: 0 0 0 .18rem $color-primary;
-        background: $color-white; 
+        width: calc((100% - 2.22rem) / 3);
+        background: $color-primary; 
+        z-index: -3;
         
         &:not(:last-child) {
-            margin-right: calc((100% - 6rem) / 3);
-            &::before {
-                content: '';
-                position: absolute; top: 0; bottom: 0; left: 0;
-                margin: auto 0;
-                width: 0;
-                height: 0;
-                padding: .1rem 6.3rem;
-                z-index: -1;
-            }
+            height: .15rem;
         }
-        &::before {
-            background: $color-primary;
+        
+        &::before,
+        &::after {
+            content: '';
+            position: absolute; top: 0; bottom: 0; left: 0;
+            margin: auto 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            padding: .15rem;
+            border-radius: 50%;
+            border: .21rem solid $color-primary;
+            z-index: 1;
+        }
+        
+        &::after {
+            z-index: -2;
+            background: $color-white;
+        }
+        & > i {
+            position: absolute; top: 0; bottom: 0; left: 0;
+            margin: auto 0;
+            line-height: 0;
+            font-size: 2.22rem;
+            color: $color-primary-dark;
         }
     }
     &--checkin {
-        box-shadow: 0 0 0 .18rem $color-primary-dark;
-        &::after {
-            content: '';
-            position: absolute; top: 0; bottom: 0; left: 0; right : 0;
-            width: .9rem;
-            height: .9rem;
-            border-radius: 50%;
-            margin: auto;
-            background: $color-primary-dark;
-        }
         &::before {
+            border: .21rem solid $color-primary-dark;
             background: $color-primary-dark;
+            background-clip: content-box;
+        }
+    }
+    &--finished {
+        background: $color-primary-dark; 
+        &::before,
+        &::after {
+            border: none;
         }
     }
    
