@@ -19,6 +19,9 @@ html {
 .u-margin-bottom--mid {
   margin-bottom: 21px; }
 
+.hidden {
+  visibility: hidden; }
+
 .btn, .btn:link, .btn:visited {
   display: inline-block;
   text-decoration: none;
@@ -30,12 +33,15 @@ html {
   margin-top: 3rem;
   border: none;
   border-radius: 1rem;
-  background: #BEE1FF;
+  background: #0275DB;
   font-size: 24px;
   color: #fff;
   cursor: pointer; }
   .btn--form:focus {
     outline: none; }
+  .btn--form.warn {
+    background: #BEE1FF;
+    cursor: initial; }
   .btn--form-1col {
     width: 100%; }
 
@@ -45,19 +51,61 @@ html {
   margin: auto;
   font-size: 0; }
   .form-group {
+    position: relative;
     margin-bottom: 2.4rem; }
   .form__label {
-    display: inline-block;
+    display: block;
     font-size: 2.1rem;
     margin-bottom: .6rem; }
+    .form__label--empty {
+      height: 2.1rem; }
   .form__input {
     display: block;
     font-size: 21px;
     padding: 1.2rem 0 1.2rem 1.5rem;
     width: calc(100% - 1.5rem);
+    outline: none;
+    border: 0.15rem solid #000;
+    border-radius: .6rem; }
+  .form__select {
+    padding: 1.2rem 0 1.2rem 1.5rem;
+    width: 100%;
     border: none;
+    box-shadow: 0 0 0 .15rem #000;
     border-radius: .6rem;
-    box-shadow: 0 0 0 .15rem #000; }
+    font-size: 21px; }
+    .form__select:required:invalid {
+      color: #555; }
+  .form__input:focus, .form__select:focus {
+    box-shadow: 0 0 0 0.21rem #BEE1FF; }
+  .form__control ~ i {
+    display: none;
+    position: absolute;
+    top: 4.3rem;
+    margin: auto 0;
+    right: 1.2rem; }
+  .form__control.warn, .form__control.warn:focus {
+    border: 0.15rem solid #f5a623; }
+  .form__control.warn ~ i {
+    display: block;
+    font-size: 18px;
+    color: #f5a623; }
+  .form__control.warn ~ .tooltip {
+    display: block; }
+  .form__control ~ .visa,
+  .form__control ~ .master {
+    display: none;
+    font-size: 2.4rem; }
+  .form--2col {
+    display: inline-block;
+    width: 45%; }
+    .form--2col:not(:last-child) {
+      margin-right: 10%; }
+  .form--3col {
+    display: inline-block;
+    width: 30%; }
+    .form--3col:not(:last-child) {
+      margin-right: 3.3%; }
 
 .process {
   font-size: 0;
@@ -105,3 +153,28 @@ html {
     background: #0275DB; }
     .process--finished::before, .process--finished::after {
       border: none; }
+
+.tooltip {
+  position: absolute;
+  top: 3.6rem;
+  right: -2.1rem;
+  display: none;
+  margin: auto 0;
+  padding: .9rem .9rem;
+  border-radius: .6rem;
+  font-size: 1.5rem;
+  color: #fff;
+  transform: translateX(100%);
+  background: rgba(245, 166, 35, 0.9); }
+  .tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: -.8rem;
+    margin: auto 0;
+    width: 0;
+    height: 0;
+    border-right: 0.9rem solid #f5a623;
+    border-top: .9rem solid transparent;
+    border-bottom: .9rem solid transparent; }

@@ -4,30 +4,103 @@
     margin: auto;
     font-size: 0;
     &-group {
+        position: relative;
         margin-bottom: 2.4rem;
     }
     &__label {
-        display: inline-block;
+        display: block;
         font-size: 2.1rem;
         margin-bottom: .6rem;
+        
+        &--empty {
+            height: 2.1rem;
+        }
     }
     &__input {
         display: block;
         font-size: 21px;
         padding: 1.2rem 0 1.2rem 1.5rem;
         width: calc(100% - 1.5rem);
-        border: none;
+        outline: none;
+        border: .15rem solid $color-black;
         border-radius: .6rem;
-        box-shadow: 0 0 0 .15rem #000 ;
     }
+
+    &__select {
+        padding: 1.2rem 0 1.2rem 1.5rem;
+        width: 100%;
+        border: none;
+        box-shadow: 0 0 0 .15rem #000;
+        border-radius: .6rem;
+        font-size: 21px;
+        // color: #555;
+
+        // &:required {
+        //     color: #555;
+        // }
+
+        &:required:invalid {
+            color: #555;
+        }
+    }
+
+    &__input:focus,
+    &__select:focus {
+        box-shadow: 0 0 0 .21rem $color-primary;
+    }
+
+
+
+    //control warn
+    &__control {
+        & ~ i {
+            display: none;
+            position: absolute;
+            top: 4.3rem;
+            margin: auto 0;
+            right:  1.2rem;
+        }
+        &.warn {
+            &,&:focus {
+                border: .15rem solid $color-warn;
+            }
+            & ~ i {
+                display: block;
+                font-size: 18px;
+                color: $color-warn;
+            }
+
+            & ~ .tooltip {
+                display: block;
+            }
+        }
+
+        & ~ .visa,
+        & ~ .master {
+            display: none;
+            font-size: 2.4rem;
+        }
+    }
+
 
 
 
     // layout
-    &--1col {
-
+    &--1row {
+        // margin-bottom: 1.2rem;
     }
     &--2col {
-
+        display: inline-block;
+        width: 45%;
+        &:not(:last-child) {
+            margin-right: 10%;
+        }
+    }
+    &--3col {
+        display: inline-block;
+        width: 30%;
+        &:not(:last-child) {
+            margin-right: 3.3%;
+        }
     }
 }

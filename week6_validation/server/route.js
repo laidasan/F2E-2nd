@@ -11,6 +11,9 @@ function route(res,req,handlers) {
             pathname = pathname;
             console.log('500')
             break;
+        case '/index.html':
+            pathname = pathname;
+            break
         default :
             console.log('404');
             pathname = '/findFile';

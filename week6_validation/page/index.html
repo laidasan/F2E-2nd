@@ -6,6 +6,7 @@
     <script src="https://kit.fontawesome.com/ab4c3d994d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
+    <script src="../app/universal.js"></script>
     <title>F2E 2nd Week6 Validation</title>
 </head>
 <body>
@@ -20,18 +21,25 @@
     <form action="" method="post" class="form">
         <div class="form-group form--1col">
             <label for="account" class="form__label">Account</label>
-            <input type="email" name="" id="account" class="form__input" placeholder="example@email.com">
+            <input type="email" name="Email" id="account" class="form__input form__control" data-valid="1" data-toggle="tooltip" placeholder="example@email.com" title="INVALID EMAIL" required>
+            <div class="tooltip"></div>
+            <i class="fas fa-exclamation-triangle"></i>
         </div>
         <div class="form-group form--1col">
             <label for="password" class="form__label">password</label>
-            <input type="password" name="" id="password" class="form__input" placeholder="">
+            <input type="password" name="Password" id="password" class="form__input form__control" data-valid="1" data-toggle="tooltip" placeholder="" title="MINIMUM 8 CHARACTERS">
+            <div class="tooltip"></div>
+            <i class="fas fa-exclamation-triangle"></i>
         </div>
         <div class="form-group form--1col">
             <label for="comfirmPassword" class="form__label">Comfirm Password</label>
-            <input type="password" name="" id="comfirmpassword" class="form__input" placeholder="">
+            <input type="password" name="ComfirmPassword" id="comfirmpassword" class="form__input form__control" data-valid="1" data-toggle="tooltip" placeholder="" title="NOT MATCH">
+            <div class="tooltip"></div>
+            <i class="fas fa-exclamation-triangle"></i>
         </div>
-        <button class="btn btn--form btn--form-1col" type="submit" value="submit">submit & next</button>
+        <button class="btn btn--form btn--form-1col warn" type="submit" value="submit">submit & next</button>
     </form>
     <script src="../app/form.js"></script>
+    <script src="../app/validation-base.js"></script>
 </body>
 </html>

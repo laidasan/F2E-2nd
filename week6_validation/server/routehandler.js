@@ -1,3 +1,4 @@
+const universal = require('../app/universal');
 const querystring = require('querystring');
 const path = require('path');
 const fs = require('fs');
@@ -21,8 +22,18 @@ function getCityData(res,req,queryurl) {
             req.end();
         }
     })
-    
+}
+
+function index(res,req,queryurl) {
+    res.on('data',(postDataChunk) => {
+        console.log('data received');
+    })
+    res.on('end',() => {
+        console.log('request received end');
+
+    })
 }
 module.exports = {
-    getCityData : getCityData
+    getCityData : getCityData,
+    index : index
 }

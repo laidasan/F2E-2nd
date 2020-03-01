@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ab4c3d994d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../style/reset.css">
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="../app/universal.js"></script>
+    <title>F2E 2nd Week6 Validation</title>
+</head>
+<body>
+    <div class="process">
+        <div class="process__circle process--finished"><i class="fas fa-check-circle"></i></div>
+        <div class="process__circle process--finished"><i class="fas fa-check-circle"></i></div>
+        <div class="process__circle process--finished"><i class="fas fa-check-circle"></i></div>
+        <div class="process__circle process--checkin"></div>
+    </div>
+    <h2 class="heading-secondary u-text-center">Create Account</h2>
+    <h3 class="heading-thread u-text-center u-margin-bottom--mid">Glad to See you here</h3>
+    <form action="" method="post" class="form">
+        <div class="form-group form--1col">
+            <label for="CardNumber" class="form__label">Card Number</label>
+            <input type="text" name="CardNumber" id="CardNumber" class="form__input form__control" data-valid="1" placeholder="1234 5678 9012 3456" data-toggle="tooltip"  title="INVALID NUMBER" required>
+            <div class="tooltip"></div>
+            <i class="fas fa-exclamation-triangle"></i>
+            <i class="fab fa-cc-visa visa hidden" style="display:block;"></i>
+            <i class="fab fa-cc-mastercard master hidden"></i>
+        </div>
+        <div class="form--1row">
+            <div class="form-group form--2col">
+                <label for="CardholderName" class="form__label">Cardholder Name</label>
+                <input type="email" name="" id="CardholderName" class="form__input" placeholder="EXAMPLE NAME" required>
+            </div>
+            <div class="form-group form--2col">
+                <label for="BankName" class="form__label">Bank Name</label>
+                <input type="email" name="" id="BankName" class="form__input" placeholder="EXAMPLE BANK" required>
+            </div>
+        </div>
+        <div class="form--1row">
+            <div class="form-group form--3col">
+                <label for="cvv" class="form__label">CVV</label>
+                <input type="text" name="" id="cvv" class="form__input" placeholder="123" pattern="[0-9]{3}" required>
+            </div>
+            <div class="form-group form--3col">
+                <label for="ExpireDateMonth" class="form__label">Expire Date</label>
+                <select name="" id="ExpireDateMonth" class="form__select form__select--month" required>
+                    <option value="" hidden>MM</option>
+                </select>
+            </div>
+            <div class="form-group form--3col">
+                <select name="" id="ExpireDateYear" class="form__select form__select--ExpireDateYear" data-from="2008" data-to="2032" required>
+                    <option value="" hidden>YY</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn--form btn--form-1col warn" type="submit" value="submit">submit & next</button>
+    </form>
+    <script src="../app/form.js"></script>
+    <script src="../app/validation-base.js"></script>
+    <script src="../app/validation-creditcard.js"></script>
+</body>
+</html>
