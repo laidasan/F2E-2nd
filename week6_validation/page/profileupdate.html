@@ -7,7 +7,7 @@
     <script src="https://kit.fontawesome.com/ab4c3d994d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="../app/universal.js">
+    <script src="../app/universal.js"></script>
     <title>Profile Update</title>
 </head>
 <body>
@@ -30,8 +30,12 @@
                     </div>
                 </label>
                 <input type="file" name="Photos" id="uploadFile" style="display: none;" accept="image/*"  multiple>
-            <i class="fas fa-exclamation-triangle"></i>
-                <div class="form-group form--1row"><p class="form__warnMessage"><i class="fas fa-exclamation-triangle"></i></p></div>
+                <div class="form-group form--1row">
+                    <p class="form__warnMessage">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span></span>
+                    </p>
+                </div>
                 <div class="form-group form--1row">
                     <img alt="圖片" class="form--3col form__uploadImg">
                     <img alt="圖片" class="form--3col form__uploadImg">
@@ -41,7 +45,7 @@
         </div>
         <button class="btn btn--form btn--form-1col warn"  data-next="payment.html"  data-step="upload" type="submit" value="submit">submit & next</button>
     </form>
-    <script src="../app/validation-base.js"></script>
+    <!-- <script src="../app/validation-base.js"></script> -->
     <script src="../app/validation-uploadimg.js"></script>
 </body>
 </html>

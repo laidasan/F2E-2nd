@@ -12,4 +12,5 @@
                (/^5\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}/.test(val) && 'master') ||
                ''
     },
+    checkImg: function(ary) {return ary.length <= 3 && ary.every(file => file.width <= 150 && file.height <=150)}
 })

@@ -111,6 +111,7 @@
         position: relative;
         display: inline-block;
         height: 150px;
+        vertical-align: middle;
         &:not([src]) {
             visibility: hidden;
         }
@@ -130,14 +131,14 @@
         letter-spacing: .12rem;
         color: $color-white;
         border-radius: .9rem;
-        visibility: hidden;
+        // visibility: hidden;
         & > i {
             vertical-align: middle;
             margin-right: .6rem;
         }
         &.warn {
             display: block;
-            visibility: visible;
+            // visibility: visible;
             background: $color-warn;
         }
     }

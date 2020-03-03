@@ -115,7 +115,8 @@ html {
   .form__uploadImg {
     position: relative;
     display: inline-block;
-    height: 150px; }
+    height: 150px;
+    vertical-align: middle; }
     .form__uploadImg:not([src]) {
       visibility: hidden; }
     .form__uploadImg::before {
@@ -132,14 +133,12 @@ html {
     text-align: center;
     letter-spacing: .12rem;
     color: #fff;
-    border-radius: .9rem;
-    visibility: hidden; }
+    border-radius: .9rem; }
     .form__warnMessage > i {
       vertical-align: middle;
       margin-right: .6rem; }
     .form__warnMessage.warn {
       display: block;
-      visibility: visible;
       background: #f5a623; }
   .form--2col {
     display: inline-block;
