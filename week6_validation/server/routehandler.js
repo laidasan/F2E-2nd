@@ -37,25 +37,31 @@ function index(req,res,queryurl) {
 
 function uploadImg(req,res,queryurl) {
     console.log('requesthandler uploadImg was called');
-    // console.log(req.files);
-    // console.log(req.files.Photos);
-    const form = formidable({multiples:true,maxFileSize});
-    // const form  = new formidable.IncomingForm();
-    form.parse(req,(err,field,files) => {
-        if(!err) {
-            console.log('parse sucess');
-            // console.log(files.Photos instanceof Array);
-            files.Photos instanceof Array ? files.Photos.forEach(file => console.log(file.path)) : console.log(files.Photos.path);
-            files.Photos.forEach((file,index) => {
-                fs.renameSync(file.path,path.join(__dirname,`../tmp/test${index}.png`));
-            })
-            // fs.renameSync(files.Photos.path,path.join(__dirname,'../tmp/test.png'));
-        }else {
-            console.log('err')
-        }
-    })
-    res.writeHead(200,{'Content-type' : 'text/plain'});
-    res.write('upload file');
+    const form = formidable({multiples:true});
+    // form.parse(req,(err,field,files) => {
+    //     if(!err) {
+    //         console.log('parse sucess');
+    //         files.Photos instanceof Array ? files.Photos.forEach(file => console.log(file.path)) : console.log(files.Photos.path);
+    //         files.Photos.forEach((file,index) => {
+    //             fs.renameSync(file.path,path.join(__dirname,`../tmp/test${index}.png`));
+    //         })
+    //         // fs.renameSync(files.Photos.path,path.join(__dirname,'../tmp/test.png'));
+    //     }else {
+    //         console.log('err')
+    //     }
+    // })
+    // fs.readFile(path.join(__dirname,'../page/payment.html'),(err,content) => {
+    //     if(!err) {
+    //         res.writeHead(200,{'Content-type' : 'text/html'});
+    //         res.write(content);
+    //         res.end();
+    //     }
+    // })
+    res.writeHead(200,{
+        'Content-type' : 'text/plain',
+        'Access-Control-Allow-Origin': '*'
+});
+    res.write('payment.html');
     res.end()
 }
 module.exports = {
