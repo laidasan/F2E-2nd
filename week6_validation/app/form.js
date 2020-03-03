@@ -18,9 +18,9 @@
     
     let xhr = new XMLHttpRequest;
     
-    form.addEventListener('submit',(e) => {
-        e.preventDefault();
-    })
+    // form.addEventListener('submit',(e) => {
+    //     e.preventDefault();
+    // })
 
 
     //可選填的select，把尚未選擇的字體設定灰色

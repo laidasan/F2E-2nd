@@ -1,17 +1,14 @@
 const url = require('url');
-function route(res,req,handlers) {
+function route(req,res,handlers) {
     console.log('router endter route');
-    queryurl = url.parse(res.url);
-    // console.log(queryurl.pathname);
+    queryurl = url.parse(req.url);
     let pathname = queryurl.pathname;
-    console.log(pathname);
-    console.log(handlers['/getCityData']);
     switch (pathname) {
         case '/getCityData':
             pathname = pathname;
             console.log('500')
             break;
-        case '/index.html':
+        case '/uploadImg':
             pathname = pathname;
             break
         default :
@@ -19,13 +16,16 @@ function route(res,req,handlers) {
             pathname = '/findFile';
             break;
     }
+    console.log(queryurl.pathname);
+    console.log(handlers[pathname]);
+    console.log(handlers['/uploadImg']);
     if(typeof handlers[pathname] === 'function') {
-        handlers[pathname](res,req,queryurl);
+        handlers[pathname](req,res,queryurl);
     } else {
         console.log('routehandlers not found')
-        req.writeHead(404,{'Content-type' : 'text/plain'});
-        req.write('404 Not Found');
-        req.end();
+        res.writeHead(404,{'Content-type' : 'text/plain'});
+        res.write('404 Not Found');
+        res.end();
     }
 }
 

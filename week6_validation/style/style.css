@@ -59,6 +59,22 @@ html {
     margin-bottom: .6rem; }
     .form__label--empty {
       height: 2.1rem; }
+    .form__label--upload {
+      text-align: center;
+      color: #555;
+      padding: 4.8rem 0;
+      border: 0.15rem solid #000;
+      border-radius: .9rem;
+      color: #999; }
+      .form__label--upload > i {
+        font-size: 51px; }
+      .form__label--upload-txt {
+        display: inline-block;
+        text-align: left; }
+        .form__label--upload-txt > span {
+          display: block; }
+          .form__label--upload-txt > span:not(:last-child) {
+            margin-bottom: .6rem; }
   .form__input {
     display: block;
     font-size: 21px;
@@ -96,6 +112,35 @@ html {
   .form__control ~ .master {
     display: none;
     font-size: 2.4rem; }
+  .form__uploadImg {
+    position: relative;
+    display: inline-block;
+    height: 150px; }
+    .form__uploadImg:not([src]) {
+      visibility: hidden; }
+    .form__uploadImg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0; }
+  .form__warnMessage {
+    display: none;
+    padding: 1.5rem 0;
+    font-size: 2.7rem;
+    text-align: center;
+    letter-spacing: .12rem;
+    color: #fff;
+    border-radius: .9rem;
+    visibility: hidden; }
+    .form__warnMessage > i {
+      vertical-align: middle;
+      margin-right: .6rem; }
+    .form__warnMessage.warn {
+      display: block;
+      visibility: visible;
+      background: #f5a623; }
   .form--2col {
     display: inline-block;
     width: 45%; }

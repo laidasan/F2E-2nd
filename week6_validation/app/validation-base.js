@@ -26,7 +26,9 @@
 
     form.addEventListener('submit',(e) => {
         e.preventDefault();
-        return checkSubmit(status) ?  form.submit() : false; 
+        // return checkSubmit(status) ?  form.submit() : false; 
+        
+        return checkSubmit(status) && ($submit.dataset['step'] !== 'upload') ?  window.location.href = `http://127.0.0.1:5500/page/${$submit.dataset['next']}` : form.submit(); 
     })
 
     function checkSubmit(status) {

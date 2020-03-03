@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet"> -->
+    <script src="https://kit.fontawesome.com/ab4c3d994d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../style/reset.css">
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../app/universal.js">
+    <title>Profile Update</title>
+</head>
+<body>
+    <div class="process">
+        <div class="process__circle process--finished"><i class="fas fa-check-circle"></i></div>
+        <div class="process__circle process--finished"><i class="fas fa-check-circle"></i></div>
+        <div class="process__circle process--checkin"></div>
+        <div class="process__circle"></div>
+    </div>
+    <h2 class="heading-secondary u-text-center">Profile Update</h2>
+    <h3 class="heading-thread u-text-center u-margin-bottom--mid">choose your 3 picture</h3>
+    <form action="http://127.0.0.1:8888/uploadImg" method="post" class="form" enctype="multipart/form-data">
+        <div class="form-group form--1row">
+            <div class="from-group form--1col">
+                <label for="uploadFile" class="form__label form__label--upload">
+                    <i class="fas fa-images"></i>
+                    <div class="form__label--upload-txt">
+                        <span>UPLOAD UP TO 3 PHOTOS</span>
+                        <span>MAX SIZE: 150*150px</span>
+                    </div>
+                </label>
+                <input type="file" name="Photos" id="uploadFile" style="display: none;" accept="image/*"  multiple>
+            <i class="fas fa-exclamation-triangle"></i>
+                <div class="form-group form--1row"><p class="form__warnMessage"><i class="fas fa-exclamation-triangle"></i></p></div>
+                <div class="form-group form--1row">
+                    <img alt="圖片" class="form--3col form__uploadImg">
+                    <img alt="圖片" class="form--3col form__uploadImg">
+                    <img alt="圖片" class="form--3col form__uploadImg">
+                </div>
+            </div>
+        </div>
+        <button class="btn btn--form btn--form-1col warn"  data-next="payment.html"  data-step="upload" type="submit" value="submit">submit & next</button>
+    </form>
+    <script src="../app/validation-base.js"></script>
+    <script src="../app/validation-uploadimg.js"></script>
+</body>
+</html>

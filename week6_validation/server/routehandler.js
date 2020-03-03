@@ -1,8 +1,9 @@
 const universal = require('../app/universal');
 const querystring = require('querystring');
+const formidable = require('formidable');
 const path = require('path');
 const fs = require('fs');
-function getCityData(res,req,queryurl) {
+function getCityData(req,res,queryurl) {
     console.log('route handler getCityData was called');
     
     fs.stat(path.join(__dirname,'../data/data.json'),(err,stats) => {
@@ -10,30 +11,55 @@ function getCityData(res,req,queryurl) {
             console.log('have data')
             fs.readFile(path.join(__dirname,'../data/data.json'),(err,content) => {
                 if(!err) {
-                    req.writeHead(200,{'Content-type' : 'application/json'});
-                    req.write(content);
-                    req.end();
+                    res.writeHead(200,{'Content-type' : 'application/json'});
+                    res.write(content);
+                    res.end();
                 }
             })
         }else {
             console.log('sorry,we can\'t find data!')
-            req.writeHead(404,{'Content-type' : 'text/plain'});
-            req.write('404 not Found');
-            req.end();
+            res.writeHead(404,{'Content-type' : 'text/plain'});
+            res.write('404 not Found');
+            res.end();
         }
     })
 }
 
-function index(res,req,queryurl) {
-    res.on('data',(postDataChunk) => {
+function index(req,res,queryurl) {
+    req.on('data',(postDataChunk) => {
         console.log('data received');
     })
-    res.on('end',() => {
+    req.on('end',() => {
         console.log('request received end');
 
     })
 }
+
+function uploadImg(req,res,queryurl) {
+    console.log('requesthandler uploadImg was called');
+    // console.log(req.files);
+    // console.log(req.files.Photos);
+    const form = formidable({multiples:true,maxFileSize});
+    // const form  = new formidable.IncomingForm();
+    form.parse(req,(err,field,files) => {
+        if(!err) {
+            console.log('parse sucess');
+            // console.log(files.Photos instanceof Array);
+            files.Photos instanceof Array ? files.Photos.forEach(file => console.log(file.path)) : console.log(files.Photos.path);
+            files.Photos.forEach((file,index) => {
+                fs.renameSync(file.path,path.join(__dirname,`../tmp/test${index}.png`));
+            })
+            // fs.renameSync(files.Photos.path,path.join(__dirname,'../tmp/test.png'));
+        }else {
+            console.log('err')
+        }
+    })
+    res.writeHead(200,{'Content-type' : 'text/plain'});
+    res.write('upload file');
+    res.end()
+}
 module.exports = {
     getCityData : getCityData,
-    index : index
+    index : index,
+    uploadImg :uploadImg
 }

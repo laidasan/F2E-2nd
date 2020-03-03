@@ -16,12 +16,12 @@
         <div class="process__circle process--finished"><i class="fas fa-check-circle"></i></div>
         <div class="process__circle process--checkin"></div>
     </div>
-    <h2 class="heading-secondary u-text-center">Create Account</h2>
-    <h3 class="heading-thread u-text-center u-margin-bottom--mid">Glad to See you here</h3>
+    <h2 class="heading-secondary u-text-center">Paymarnt Method</h2>
+    <h3 class="heading-thread u-text-center u-margin-bottom--mid">Add your credit card infomation</h3>
     <form action="" method="post" class="form">
         <div class="form-group form--1col">
             <label for="CardNumber" class="form__label">Card Number</label>
-            <input type="text" name="CardNumber" id="CardNumber" class="form__input form__control" data-valid="1" placeholder="1234 5678 9012 3456" data-toggle="tooltip"  title="INVALID NUMBER" required>
+            <input type="text" name="CardNumber" id="CardNumber" class="form__input form__control" data-valid="1" placeholder="4 1234 5678 9012 3456" data-toggle="tooltip"  title="INVALID NUMBER" required>
             <div class="tooltip"></div>
             <i class="fas fa-exclamation-triangle"></i>
             <i class="fab fa-cc-visa visa hidden" style="display:block;"></i>
@@ -54,7 +54,7 @@
                 </select>
             </div>
         </div>
-        <button class="btn btn--form btn--form-1col warn" type="submit" value="submit">submit & next</button>
+        <button class="btn btn--form btn--form-1col warn" data-next="accountfinished.html" type="submit" value="submit">submit & next</button>
     </form>
     <script src="../app/form.js"></script>
     <script src="../app/validation-base.js"></script>
