@@ -38,6 +38,12 @@ function index(req,res,queryurl) {
 function uploadImg(req,res,queryurl) {
     console.log('requesthandler uploadImg was called');
     const form = formidable({multiples:true});
+    form.parse(req,(err,field,files) => {
+        if(!err) {
+            console.log('request parsed');
+            console.log(files instanceof Array);
+        }
+    })
     // form.parse(req,(err,field,files) => {
     //     if(!err) {
     //         console.log('parse sucess');

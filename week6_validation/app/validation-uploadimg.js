@@ -5,17 +5,47 @@
     const $warnMessageSpan = $warnMessage.querySelector('span');
     const $form = document.querySelector('.form');
     let $inputFile = document.querySelector('input[type="file"]');
+    const $labels = document.querySelectorAll('.form__img-box')
+    console.log($labels);
+    const $delImgs = document.querySelectorAll('.form__delImg');
+
+    const $label = document.querySelector('.form__img-box');
+    // console.log($label);
+    // $label.addEventListener('click',(e) => {
+    //     console.log('label click');
+    // })
     let addFiles = [];
-    console.log(this.universal)
-    console.log($images);
-    console.log($warnMessage)
 
     function checkSubmit(list) {
         return list.length === 3 ? $submit.classList.remove('warn') : $submit.classList.add("warn");
     }
     function showImage(list) {
-        list.forEach((file,index) => $images[index].setAttribute('src',URL.createObjectURL(file)));
+        $images.forEach((image) => image.removeAttribute('src'));
+        list.forEach((file,index) => {
+            $images[index].setAttribute('src',URL.createObjectURL(file));
+            $images[index].parentElement.removeAttribute('for');
+            console.log($images[index].parentElement);
+        });
         checkSubmit(list);
+        // console.log($images[index].parentElement);
+    }
+    function deleteImg(e,index) {
+        return function() {
+            addFiles.splice(index,1);
+            showImage(addFiles);
+
+            //2020/3/4 label.setAttribute會點開上傳檔案畫面，但即使停止了事件傳遞與codepen測試(測試不會setAttribute不會造成觸發)
+            //所以先暫用setTimeout來解決
+            setTimeout(() => {
+                $labels.forEach((label) => {
+                    label.setAttribute('for','uploadFile');
+                })
+            },0)
+            // console.log($labels);
+            // $labels.forEach((label) => {
+            //     label.setAttribute('for','uploadFile');
+            // })
+        }();
     }
 
 
@@ -72,17 +102,23 @@
         }
     })
 
-    $form.addEventListener('submit',(e) => {
-        e.preventDefault();
-        let isSubmit = $submit.className.includes('warn') ? false : true;
-        let xhr = new XMLHttpRequest;
-        xhr.open('Get','http://127.0.0.1:8888/uploadImg',true);
-        xhr.onload = () => {
-            if(xhr.status >=200 && xhr.status <= 300) {
-                console.log(xhr.responseText);
-                window.location.href = `http://127.0.0.1:5500/page/${xhr.responseText}`;
-            }
-        }
-        isSubmit ? xhr.send(null) : '';
+
+    $delImgs.forEach((delImg,index) => {
+        delImg.addEventListener('click',(e) => {
+            deleteImg(e,index);
+        })
     })
+    // $form.addEventListener('submit',(e) => {
+    //     e.preventDefault();
+    //     let isSubmit = $submit.className.includes('warn') ? false : true;
+    //     let xhr = new XMLHttpRequest;
+    //     xhr.open('Get','http://127.0.0.1:8888/uploadImg',true);
+    //     xhr.onload = () => {
+    //         if(xhr.status >=200 && xhr.status <= 300) {
+    //             console.log(xhr.responseText);
+    //             window.location.href = `http://127.0.0.1:5500/page/${xhr.responseText}`;
+    //         }
+    //     }
+    //     isSubmit ? xhr.send(null) : '';
+    // })
 })();
