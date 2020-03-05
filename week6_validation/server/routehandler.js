@@ -1,6 +1,7 @@
 const universal = require('../app/universal');
 const querystring = require('querystring');
 const formidable = require('formidable');
+const sizeOf = require('image-size');
 const path = require('path');
 const fs = require('fs');
 function getCityData(req,res,queryurl) {
@@ -41,35 +42,56 @@ function uploadImg(req,res,queryurl) {
     form.parse(req,(err,field,files) => {
         if(!err) {
             console.log('request parsed');
-            console.log(files instanceof Array);
+            if(files.Photos) {
+                //將files 轉換成 Array，因為只有一個時files會是Object
+                let photoFiles = files.Photos instanceof Array ? files.Photos : [files.Photos];
+                //使用image-size package讀每個image 長寬
+                let uploadFiles = photoFiles.map(file => {
+                    let size = sizeOf(file.path);
+                    return {width: size.width,height: size.height};
+                })
+                let result = false;
+                //universial.checkImg檢查每個照片的大小是否有超過尺寸
+                if(uploadFiles.length > 0 && universal.checkImg(uploadFiles)) {
+                    photoFiles.forEach((file,index) => {
+                        fs.renameSync(file.path,path.join(__dirname,`../tmp/upload${index}${file.name}`))
+                    })
+                    result = true;
+                }
+                //根據檢查結果發出不同的response
+                result ? (() => {
+                    console.log('pass');
+                    res.writeHead(200,{
+                        'Content-type' : 'text/plain',
+                        'Access-Control-Allow-Origin': '*'
+                    })
+                    res.write('payment.html');
+                    res.end();
+                })() :(() => {
+                    console.log('no pass')
+                    res.writeHead(302,{
+                        'Content-type': 'text/plain',
+                        'Access-Control-Allow-Origin': '*'
+                    })
+                    res.write('profileupdate.html');
+                    res.end();
+                })()
+            }else {
+                res.writeHead(404,{
+                    'Content-type' : 'text/plain',
+                    'Access-Control-Allow-Origin': '*'
+            });
+                res.write('profileupdate.html');
+                res.end();
+            }
+        }else {
+            res.writeHead(404,{'Content-type': 'text/plain'});
+            res.write('404 Not Found');
+            res.end();
         }
     })
-    // form.parse(req,(err,field,files) => {
-    //     if(!err) {
-    //         console.log('parse sucess');
-    //         files.Photos instanceof Array ? files.Photos.forEach(file => console.log(file.path)) : console.log(files.Photos.path);
-    //         files.Photos.forEach((file,index) => {
-    //             fs.renameSync(file.path,path.join(__dirname,`../tmp/test${index}.png`));
-    //         })
-    //         // fs.renameSync(files.Photos.path,path.join(__dirname,'../tmp/test.png'));
-    //     }else {
-    //         console.log('err')
-    //     }
-    // })
-    // fs.readFile(path.join(__dirname,'../page/payment.html'),(err,content) => {
-    //     if(!err) {
-    //         res.writeHead(200,{'Content-type' : 'text/html'});
-    //         res.write(content);
-    //         res.end();
-    //     }
-    // })
-    res.writeHead(200,{
-        'Content-type' : 'text/plain',
-        'Access-Control-Allow-Origin': '*'
-});
-    res.write('payment.html');
-    res.end()
 }
+
 module.exports = {
     getCityData : getCityData,
     index : index,

@@ -23,6 +23,7 @@
     "node-sass": "^4.13.1"
   },
   "dependencies": {
-    "formidable": "^1.2.2"
+    "formidable": "^1.2.2",
+    "image-size": "^0.8.3"
   }
 }

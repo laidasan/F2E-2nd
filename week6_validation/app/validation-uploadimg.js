@@ -108,17 +108,24 @@
             deleteImg(e,index);
         })
     })
-    // $form.addEventListener('submit',(e) => {
-    //     e.preventDefault();
-    //     let isSubmit = $submit.className.includes('warn') ? false : true;
-    //     let xhr = new XMLHttpRequest;
-    //     xhr.open('Get','http://127.0.0.1:8888/uploadImg',true);
-    //     xhr.onload = () => {
-    //         if(xhr.status >=200 && xhr.status <= 300) {
-    //             console.log(xhr.responseText);
-    //             window.location.href = `http://127.0.0.1:5500/page/${xhr.responseText}`;
-    //         }
-    //     }
-    //     isSubmit ? xhr.send(null) : '';
-    // })
+    $form.addEventListener('submit',(e) => {
+        e.preventDefault();
+        let isSubmit = addFiles.length === 3 ? true : false;
+        let formData = new FormData();
+        addFiles.forEach(file => {
+            formData.append('Photos',file);
+        })
+        let xhr = new XMLHttpRequest;
+        xhr.open('POST','http://127.0.0.1:8888/uploadImg',true);
+        xhr.onload = () => {
+            if(xhr.status >=200 && xhr.status < 300) {
+                window.location.href = `http://127.0.0.1:5500/page/${xhr.responseText}`;
+            }else if(xhr.status >=300 && xrh.status < 400) {
+                window.location.href = `http://127.0.0.1:5500/page/${xhr.responseText}`;
+
+            }
+        }
+        isSubmit ? xhr.send(formData) : false;
+        // isSubmit ? xhr.send(null) : '';
+    })
 })();

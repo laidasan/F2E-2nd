@@ -3,10 +3,6 @@
     const $valid = document.querySelectorAll('[data-valid]');
     const $submit = document.querySelector('[type="submit"]');
     const form = document.querySelector('.form');
-    // console.log($valid);
-    // console.log($submit);
-    // console.log(status);
-    // console.log(checkSubmit(status));
     $valid.forEach((ele) => {
         ele.addEventListener('input',(e) => {
             let checkname = `check${ele.name}`;             //組合check +  element name屬性的值
