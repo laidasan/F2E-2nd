@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ab4c3d994d.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style/reset.css">
     <link rel="stylesheet" href="../style/style.css">
@@ -17,8 +18,184 @@
         </nav>
     </header>
     <div class="todolist">
-
+        <div class="feature__addTask">
+            <div class="feature__container feature-add">
+                <i class="fas fa-plus feature-add__plusIcon"></i>
+                <span>Add Task</span>
+            </div>
+            <div class="todolist__task edit" data-isedit="0">
+                <div class="todolist__task__tag">
+                    <h4 class="todolist__task__title heading-fourth">
+                        <input type="checkbox" name="TaskCheckBox" class="todolist__task__checkbox">
+                        <div class="todolist__task__tagFeature">
+                            <i class="far fa-star todolist__task__tagFeatureStar star"></i>
+                            <i class="fas fa-pen todolist__task__tagFeatureEdit edit"></i>
+                        </div>
+                        <span class="todolist__task__titleContent">TypeSomething here</span>
+                    </h4>
+                </div>
+                <form action="" class="todolist__task__form">
+                    <div class="todolist__task__formWrap deadline" data-type="Deadline">
+                        <h5 class="todolist__task__formHeading heading-fifth">
+                            <i class="far fa-calendar-alt"></i>
+                            Deadline
+                        </h5>
+                        <div class="todolist__task__formGroup todolist__task__formGroup--2-1">
+                            <input type="date" name="DeadlineDay" class="todolist__task__formDay" >
+                        </div>
+                        <div class="todolist__task__formGroup todolist__task__formGroup--2-1">
+                            <a href="#" class="todolist__task__formTime">hh/mm</a>
+                        </div>
+                    </div>
+                    <div class="todolist__task__formWrap file">
+                        <h5 class="todolist__task__formHeading heading-fifth">
+                            <i class="far fa-file"></i>
+                            File
+                        </h5>
+                        <div class="todolist__task__formGroup todolist__task__formGroup--2-1">
+                            <span class="todolist__task__form__fileInfo todolist__task__form__fileName">fileName</span>
+                            <span class="todolist__task__form__fileInfo todolist__task__form__fileTime">timeline</span>
+                        </div>
+                        <!--  for="UploadFile"  -->
+                        <label class="todolist__task__formLabel todolist__task__formLabel--upload">
+                            <input type="file" name="UploadFile" class="todolist__task__formUpload">
+                            <i class="fas fa-plus"></i>
+                        </label>
+                    </div>
+                    <div class="todolist__task__formWrap description">
+                        <h5 class="todolist__task__formHeading heading-fifth">
+                            <i class="far fa-comment-dots"></i>
+                            description
+                        </h5>
+                        <!-- <input type="text"> -->
+                        <textarea name="TaskDescription" rows="9" class="todolist__task__formDescription"></textarea>
+                        <span class="todolist__task__formDescriptionShow">description</span>
+                    </div>
+                    <div class="todolist__task__formGroup">
+                        <button class="todolist__task__formButton todolist__task__formButton--cancel" value="cancel" type="reset">Cancel</button>
+                        <button class="todolist__task__formButton todolist__task__formButton--save" value="save" type="submit">AddTask</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="todolist__task" data-isedit="0" data-isshow="0" >
+            <div class="todolist__task__tag" data-index="1">
+                <h4 class="todolist__task__title heading-fourth">
+                    <input type="checkbox" name="TaskCheckBox" class="todolist__task__checkbox">
+                    <div class="todolist__task__tagFeature">
+                        <i class="far fa-star todolist__task__tagFeatureStar star"></i>
+                        <i class="fas fa-pen todolist__task__tagFeatureEdit edit" data-index="1"></i>
+                    </div>
+                    <span class="todolist__task__titleContent">TypeSomething here</span>
+                </h4>
+                <div class="todolist__task__tagDescription">
+                    <i class="far fa-calendar-alt"></i><span>4/1</span>
+                    <i class="far fa-file"></i>
+                    <i class="far fa-comment-dots"></i>
+                </div>
+            </div>
+            <form action="" class="todolist__task__form">
+                <div class="todolist__task__formWrap deadline" data-type="Deadline">
+                    <h5 class="todolist__task__formHeading heading-fifth">
+                        <i class="far fa-calendar-alt"></i>
+                        Deadline
+                    </h5>
+                    <div class="todolist__task__formGroup todolist__task__formGroup--2-1">
+                        <input type="date" name="DeadlineDay" class="todolist__task__formDay" >
+                    </div>
+                    <div class="todolist__task__formGroup todolist__task__formGroup--2-1">
+                        <a href="#" class="todolist__task__formTime">hh/mm</a>
+                    </div>
+                </div>
+                <div class="todolist__task__formWrap file">
+                    <h5 class="todolist__task__formHeading heading-fifth">
+                        <i class="far fa-file"></i>
+                        File
+                    </h5>
+                    <div class="todolist__task__formGroup todolist__task__formGroup--2-1">
+                        <span class="todolist__task__form__fileInfo todolist__task__form__fileName">fileName</span>
+                        <span class="todolist__task__form__fileInfo todolist__task__form__fileTime">timeline</span>
+                    </div>
+                    <!--  for="UploadFile"  -->
+                    <label class="todolist__task__formLabel todolist__task__formLabel--upload">
+                        <input type="file" name="UploadFile" class="todolist__task__formUpload">
+                        <i class="fas fa-plus"></i>
+                    </label>
+                </div>
+                <div class="todolist__task__formWrap description">
+                    <h5 class="todolist__task__formHeading heading-fifth">
+                        <i class="far fa-comment-dots"></i>
+                        description
+                    </h5>
+                    <!-- <input type="text"> -->
+                    <textarea name="TaskDescription" rows="9" class="todolist__task__formDescription"></textarea>
+                    <span class="todolist__task__formDescriptionShow">description</span>
+                </div>
+                <div class="todolist__task__formGroup">
+                    <button class="todolist__task__formButton todolist__task__formButton--cancel" value="cancel" type="reset" data-index="1">Cancel</button>
+                    <button class="todolist__task__formButton todolist__task__formButton--save" value="save" type="submit" data-index="1">Save</button>
+                </div>
+            </form>
+        </div>
+        <div class="todolist__task" data-isedit="0" data-isshow="0">
+            <div class="todolist__task__tag" data-index="2">
+                <h4 class="todolist__task__title heading-fourth">
+                    <input type="checkbox" name="TaskCheckBox" class="todolist__task__checkbox">
+                    <div class="todolist__task__tagFeature">
+                        <i class="far fa-star todolist__task__tagFeatureStar star"></i>
+                        <i class="fas fa-pen todolist__task__tagFeatureEdit edit" data-index="2"></i>
+                    </div>
+                    <span class="todolist__task__titleContent">TypeSomething here</span>
+                </h4>
+                <div class="todolist__task__tagDescription">
+                    <i class="far fa-calendar-alt"></i><span>4/1</span>
+                </div>
+            </div>
+            <form action="" class="todolist__task__form">
+                <div class="todolist__task__formWrap deadline" data-type="Deadline">
+                    <h5 class="todolist__task__formHeading heading-fifth">
+                        <i class="far fa-calendar-alt"></i>
+                        Deadline
+                    </h5>
+                    <div class="todolist__task__formGroup todolist__task__formGroup--2-1">
+                        <input type="date" name="DeadlineDay" class="todolist__task__formDay" >
+                    </div>
+                    <div class="todolist__task__formGroup todolist__task__formGroup--2-1">
+                        <a href="#" class="todolist__task__formTime">hh/mm</a>
+                    </div>
+                </div>
+                <div class="todolist__task__formWrap file">
+                    <h5 class="todolist__task__formHeading heading-fifth">
+                        <i class="far fa-file"></i>
+                        File
+                    </h5>
+                    <div class="todolist__task__formGroup todolist__task__formGroup--2-1">
+                        <span class="todolist__task__form__fileInfo todolist__task__form__fileName">fileName</span>
+                        <span class="todolist__task__form__fileInfo todolist__task__form__fileTime">timeline</span>
+                    </div>
+                    <!--  for="UploadFile"  -->
+                    <label class="todolist__task__formLabel todolist__task__formLabel--upload">
+                        <input type="file" name="UploadFile" class="todolist__task__formUpload">
+                        <i class="fas fa-plus"></i>
+                    </label>
+                </div>
+                <div class="todolist__task__formWrap description">
+                    <h5 class="todolist__task__formHeading heading-fifth">
+                        <i class="far fa-comment-dots"></i>
+                        description
+                    </h5>
+                    <!-- <input type="text"> -->
+                    <textarea name="TaskDescription" rows="9" class="todolist__task__formDescription"></textarea>
+                    <span class="todolist__task__formDescriptionShow">description</span>
+                </div>
+                <div class="todolist__task__formGroup">
+                    <button class="todolist__task__formButton todolist__task__formButton--cancel" value="cancel" type="reset" data-index="2">Cancel</button>
+                    <button class="todolist__task__formButton todolist__task__formButton--save" value="save" type="submit" data-index="2">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
     <script src="../source/nav.js"></script>
+    <script src="../source/todolist.js"></script>
 </body>
 </html>

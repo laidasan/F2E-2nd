@@ -12,7 +12,6 @@
         let isOption = target.matches ? target.matches('.nav__option') : target.className.includes('nav__option')
         if(isOption) {
             let hoverIndex = target.dataset['index']
-            console.log(hoverIndex,$navOptionLine)
             $navOptionLine.style.setProperty('transform',`translateX(${hoverIndex * 100}%)`)
         }
     })

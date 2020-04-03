@@ -1,0 +1,498 @@
+.todolist {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    min-width: 32.5rem;
+    max-width: 96rem;
+    margin: 1.2rem auto;
+
+
+    &__task {
+        // display: block;
+        //待修改margin
+        // padding: 2.4rem 0;
+        margin-bottom: 3.6rem;
+
+
+        //用z-index 與 positon搭配形成疊層上下文(結界)
+        //讓task與內容相比，task都在最下層
+        position: relative;
+        z-index: 0;
+
+        &__tag {
+            //這裡不生成疊層上下文(結界)
+            //要讓tag覆蓋在description之上，所以不生成疊層上下文(結界)
+            position: relative;
+            background: transparent;
+            border-radius: 6px;
+            padding: 2.4rem 3.2rem;
+            cursor: pointer;
+
+
+            //before生成背景色用
+            &::before {
+                content: '';
+                position: absolute;right: 0;left: 0;top: 0;bottom :0;
+                z-index: -2;
+                background: $color-primary-bkLight;
+            }
+
+            //tast tag line
+            &::after {
+                content: '';
+                display: block;
+                height: 0;
+                padding: .18rem 0;
+                // margin: 2.4rem -3.2rem 0;
+
+                //animation
+                background: transparent;
+                margin: 0;
+            }
+
+            &Feature {
+                position: absolute;
+                top: 0; right : 3.2rem; top: 0; bottom: 0;
+                font-size: 0;
+                & > i {
+                    font-size: 2.4rem;
+                    line-height: 3rem;
+                    vertical-align: middle;
+                    cursor: pointer;
+                }
+
+                &Star {
+                    margin-right: 3.2rem;
+                }
+
+                &Edit {
+                }
+            }
+
+
+            &Description {
+                //讓tag覆蓋在descriptio之上
+                position: relative;
+                z-index: -1;
+
+                font-size: 0;
+                padding-left: 4rem;
+                // margin-bottom: 1.2rem;
+                & > i {
+                    font-size: 2.4rem;
+                    margin-right: .9rem;
+                }
+                & > i:not(:first-child) {
+                    margin-right: 1.5rem;
+                }
+                & span {
+                    font-size: 1.5rem;
+                    margin-right: 1.5rem;
+                }
+
+
+
+            }
+
+            // &--open {
+            //     &::after {
+            //         content: '';
+            //         display: block;
+            //         height: 0;
+            //         padding: .15rem 0;
+            //         margin: 0 -3.2rem;
+            //         background: $color-primary-bkDark;
+            //     }
+            // }
+        }
+
+
+        &__title {
+            font-size: 2.4rem;
+            border-radius: 6px;
+            // padding: 0 3.2rem;
+            // padding: 2.4rem 0;
+
+            //2020/4/3
+            //這個marign bottom 要有description有才需要
+            margin-bottom: 1.2rem;
+            //給tagFeature定位用
+            position: relative;
+
+            &Content {
+                display: inline-block;
+                cursor: auto;
+            }
+        }
+
+
+        //checkbox
+        &__checkbox {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+
+            position: relative;
+            z-index: 0;
+            width: 2.4rem;
+            height: 2.4rem;
+            vertical-align: middle;
+            box-shadow: 0 0 0 1px $color-black;
+            background: $color-white;
+            color: $color-black;
+            border-radius: 3px;
+            margin: 0 .1.5rem 0 0;
+            padding: 0;
+
+            &:checked {
+                background: $color-primary;
+            }
+            &:focus {
+                outline: none;
+            }
+
+            //Tick
+            &:checked::after,
+            &:checked::before {
+                content: '';
+                position: absolute;
+                background: $color-white;
+            }
+            &:checked::before {
+                left: .6rem; top: .9rem;
+                width: .36rem;
+                height: .9rem;
+                transform-origin: 50% 50%;
+                transform: rotate(-51deg);
+            }
+            &:checked::after {
+                right: .68rem; top: .42rem;
+                width: .36rem;
+                height: 1.5rem;
+                transform-origin: 50% 50%;
+                transform: rotate(39deg);
+            }
+        }
+
+
+
+        //form
+        &__form {
+            // padding: 2.4rem 0 0;
+            font-size: 0;
+            position: relative;
+            //z-index:0 來產生疊層上下文(結界)用
+            //把form內層的z-index比較鎖在form內
+            z-index: 0;
+            border-radius: 0 0 6px 6px;
+
+            //animation
+            padding: 0;
+            margin-top: -2.4rem;
+            transition: padding .24s linear;
+            // max-height: 0;
+
+            &.open {
+                padding: 2.4rem 0 2.4rem;
+            }
+
+            //form shadow (when task editing)
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0; bottom: 0;
+                left: 0; right: 0;
+                z-index: -1;
+                // background: #cd0000;
+                border-radius: 0 0 6px 6px ;
+                box-shadow: 0 1.2rem .6rem -.3rem $color-primary-bkDark;
+
+                //animation
+                display: none;
+            }
+            background: $color-primary-bkLight;
+            &Heading {
+                font-size: 2.1rem;
+                margin-bottom: 1.2rem;
+            }
+
+            &Day {
+                width: calc(100% - 1.5rem);
+                margin: 0;
+                padding: .3rem 0 .3rem 1.5rem;
+                border: none;
+                background: transparent;
+                font-size: 1.5rem;
+                background: $color-white;
+
+                
+                //需要vertical-align: bottom 來對其底線
+                //否則會高出差不多1px
+                vertical-align: bottom;
+            }
+
+            &Time {
+                display:inline-block;
+                width: calc(100% - 1.5rem);
+                padding: .7rem 0 .7rem 1.5rem;
+                font-size: 1.5rem;
+                text-decoration: none;
+                color: $color-black;
+                letter-spacing: .12rem;
+                background: $color-white;
+                
+                //對其底線
+                vertical-align: bottom;
+            }
+
+
+            //about upload file
+            &Label {
+                position: relative;
+                left: 2.4rem;
+                font-size: 1.5rem;
+                &--upload {
+                    & > i {
+                        font-size: 2.4rem;
+                        padding: .6rem;
+                        color: $color-white;
+                        background: $color-primary-bkDark;
+                        vertical-align: bottom;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            &Upload {
+                display: none;
+            }
+
+            &__fileInfo {
+                display: block;
+                font-size: 1.5rem;
+                padding: .18rem 0;
+
+            }
+            &__fileTime {
+                color: $color-primary-bkDarkMore;
+            }
+                    
+
+            //about description
+            &Description {
+                width: calc(100% - 3rem - 2.4rem);
+                padding: 0;
+                padding: .9rem 1.5rem;
+                margin: 0;
+                border: none;
+                resize: none;
+                border-radius: 3px;
+                position: relative;
+                left: 2.4rem;
+                &:focus {
+                    outline-color: $color-primary;
+                }
+
+
+                //not editing
+                position: absolute;
+                visibility: hidden;
+                opacity: 0;
+                // display: none; 
+                
+                &Show {
+                    position: relative;
+                    left: 2.4rem;
+                    font-size: 1.5rem;
+                    display: none;
+                }
+            }
+
+            //about Button
+            &Button {
+                width: 50%;
+                padding: 0;
+                margin: 0;
+                margin-top: 1.2rem;
+                border: none;
+                font-size: 2.4rem;
+                padding: 1.5rem 0;
+                cursor: pointer;
+
+                //animation
+                display: none;
+
+
+                &--cancel {
+                    position: relative;
+                    background: $color-white;
+                    color: $color-cancel;
+
+                    // X
+                    &::before,
+                    &::after {
+                        // content: '';
+                        position: absolute;
+                    }
+                }
+                &--save {
+                    background: $color-primary;
+                    color: $color-white;
+                }
+            }
+
+
+            //layout
+            &Wrap {
+                margin: 0 7.5rem 1.2rem;
+
+                //animation
+                position: absolute;
+                visibility: hidden;
+                opacity: 0;
+                max-height: 0;
+                transition: max-height .3s linear,
+                            opacity .3s linear;
+                            // opacity .15s .3s linear;
+
+
+                //show
+                &.show {
+                        visibility: visible;
+                        opacity: 1;
+
+                    // &:not(:first-child) {
+                    // }
+
+
+                    &.file {
+                        & > label {
+                            display: none;
+                        }
+                    }
+                    &.description {
+                        & > textarea {
+                            // background: $color-primary-bkLight;
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+
+                        //description show element
+                        & > span {
+                            display: inline;
+                        }
+                    }
+                }
+
+            }
+
+            &Group {
+                // box-shadow: 0 0 0 1px #000;
+                &--2-1 {   
+                    display: inline-block;
+                    position: relative;
+                    left: 2.4rem;
+                    width: 30%;
+                    min-width: 16.8rem;
+                    &:nth-child(2) {
+                        margin-right: .9rem;
+                    }
+                }
+            }
+
+        }
+
+         //show 
+         &.show {
+            & .todolist__task{
+
+                &__tag {
+                    border-radius: 6px 6px 0 0 ;
+                }
+
+                &__form {
+                    padding: 2.4rem 0 2.4rem;
+                    border-radius: 0 0 6px 6px;
+
+                    &Wrap {
+                        &.file {
+                            // position: static;
+                            max-height: 12rem;
+                        }
+                        &.description {
+                            // position: static;
+                            max-height: 21rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        //task edit
+        &.edit {
+            & .todolist__task__tag {
+                padding-bottom: 2.4rem;
+
+                // tag shadow
+                &::after {
+                    background: $color-primary-bkDark;
+                    margin: 2.4rem -3.2rem 0;
+                }
+
+                &Description {
+                    display: none;
+                }
+            }
+    
+
+            & .todolist__task__form {
+                padding: 2.4rem 0 0;
+                max-height: 999px;
+
+                //form shadow
+                &::before {
+                    display: block;
+                }
+
+
+                &Wrap {
+                    position: static;
+                    visibility: visible;
+                    opacity: 1;
+                    max-height: 21rem;
+
+                    & > textarea {
+                        position: relative;
+                        visibility: visible;
+                        opacity: 1;
+                        // display: block;
+                    }
+                }
+                &Button {
+                    display: inline-block;
+                }
+            }
+        }
+
+        //task complete
+        &.complete {
+            & .todolist__task__title {
+                &Content {
+                    position: relative;
+                    color: $color-complete;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        left: 0; right: 0;top: .6rem;bottom: 0;
+                        margin: auto 0;
+                        height: 0px;
+                        padding: .1rem 0;
+                        background: $color-complete;
+                    }
+                }
+            }
+        }
+    }
+}

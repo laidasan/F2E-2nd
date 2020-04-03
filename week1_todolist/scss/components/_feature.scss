@@ -1,0 +1,46 @@
+.feature {
+    &__container {
+
+    }
+    &-add {
+        position: relative;
+        font-size: 0;
+        order: -999;
+        padding: 1.8rem 0 1.8rem 4.2rem;
+        background: $color-white;
+        box-shadow: 0 0 0 3px $color-primary-bkDark;
+        margin-bottom: 2.4rem;
+        cursor: pointer;
+
+        &::after {
+            content: '';
+            position: absolute;left: 0;right: 0;top: 0;bottom: 0;
+            background: transparent;
+        }
+
+        &__plusIcon {
+            font-size: 2.1rem;
+            margin-right: 1.5rem;
+            color: $color-primary-bkDark;
+        }
+        & > span {
+            font-size: 2.4rem;
+            color: $color-primary-bkDark;
+        }
+
+        & + .todolist__task {
+            display: none;
+        }
+
+        // & + .todolist__task .todolist__task__tag {
+        //     background: #cd0000;
+        // }
+        // & + .todolist__task .todolist__task__formWrap {
+        //     position: static;
+        //     display: block;
+        //     visibility: visible;
+        //     opacity: 1;
+        //     max-height: none;
+        // }
+    }
+}
