@@ -1,9 +1,21 @@
 html {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 62.5%;
+
+    overflow-y: scroll;
+}
+:root {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+:root body{
+    position: absolute;
 }
 body {
-    background: $color-primary-bk;
+    width: 100vw;
+    overflow: hidden;
 }
-.header {
+
+body {
+    background: $color-primary-bk;
 }

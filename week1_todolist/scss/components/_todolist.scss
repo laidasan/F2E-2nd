@@ -122,6 +122,19 @@
             &Content {
                 display: inline-block;
                 cursor: auto;
+                
+            }
+
+            &Input {
+                display: none;
+                border: none;
+                font-size: 1.8rem;
+                padding: 1.2rem 0 1.2rem 1.2rem;
+                background: $color-primary-bkLight;
+
+                &:focus {
+                    outline: 1px solid $color-black;
+                }
             }
         }
 
@@ -352,7 +365,8 @@
                 opacity: 0;
                 max-height: 0;
                 transition: max-height .3s linear,
-                            opacity .3s linear;
+                            opacity .3s linear,
+                            padding .3s linear;
                             // opacity .15s .3s linear;
 
 
@@ -431,6 +445,17 @@
 
         //task edit
         &.edit {
+            & .todolist__task__title{
+                &Content {
+                    display: none;
+                    // color: #cd0000;
+                }
+                
+                &Input {
+                    display: inline-block;
+                    color: #cd0000;
+                }
+            }
             & .todolist__task__tag {
                 padding-bottom: 2.4rem;
 

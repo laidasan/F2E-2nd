@@ -29,9 +29,10 @@
                         <input type="checkbox" name="TaskCheckBox" class="todolist__task__checkbox">
                         <div class="todolist__task__tagFeature">
                             <i class="far fa-star todolist__task__tagFeatureStar star"></i>
-                            <i class="fas fa-pen todolist__task__tagFeatureEdit edit"></i>
+                            <i class="fas fa-pen todolist__task__tagFeatureEdit edit" data-index="0"></i>
                         </div>
                         <span class="todolist__task__titleContent">TypeSomething here</span>
+                        <input type="text" name="Title" placeholder="task title" class="todolist__task__titleInput">
                     </h4>
                 </div>
                 <form action="" class="todolist__task__form">
@@ -72,8 +73,8 @@
                         <span class="todolist__task__formDescriptionShow">description</span>
                     </div>
                     <div class="todolist__task__formGroup">
-                        <button class="todolist__task__formButton todolist__task__formButton--cancel" value="cancel" type="reset">Cancel</button>
-                        <button class="todolist__task__formButton todolist__task__formButton--save" value="save" type="submit">AddTask</button>
+                        <button class="todolist__task__formButton todolist__task__formButton--cancel" value="cancel" type="reset" data-index="0">Cancel</button>
+                        <button class="todolist__task__formButton todolist__task__formButton--save" value="add" type="submit">AddTask</button>
                     </div>
                 </form>
             </div>
@@ -83,10 +84,11 @@
                 <h4 class="todolist__task__title heading-fourth">
                     <input type="checkbox" name="TaskCheckBox" class="todolist__task__checkbox">
                     <div class="todolist__task__tagFeature">
-                        <i class="far fa-star todolist__task__tagFeatureStar star"></i>
+                        <i class="far fa-star todolist__task__tagFeatureStar star" data-index="1"></i>
                         <i class="fas fa-pen todolist__task__tagFeatureEdit edit" data-index="1"></i>
                     </div>
                     <span class="todolist__task__titleContent">TypeSomething here</span>
+                    <input type="text" name="Title" placeholder="task title" class="todolist__task__titleInput">
                 </h4>
                 <div class="todolist__task__tagDescription">
                     <i class="far fa-calendar-alt"></i><span>4/1</span>
@@ -142,10 +144,11 @@
                 <h4 class="todolist__task__title heading-fourth">
                     <input type="checkbox" name="TaskCheckBox" class="todolist__task__checkbox">
                     <div class="todolist__task__tagFeature">
-                        <i class="far fa-star todolist__task__tagFeatureStar star"></i>
+                        <i class="far fa-star todolist__task__tagFeatureStar star" data-index="2"></i>
                         <i class="fas fa-pen todolist__task__tagFeatureEdit edit" data-index="2"></i>
                     </div>
                     <span class="todolist__task__titleContent">TypeSomething here</span>
+                    <input type="text" name="Title" placeholder="task title" class="todolist__task__titleInput">
                 </h4>
                 <div class="todolist__task__tagDescription">
                     <i class="far fa-calendar-alt"></i><span>4/1</span>
