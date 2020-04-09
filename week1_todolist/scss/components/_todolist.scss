@@ -7,6 +7,13 @@
     margin: 1.2rem auto;
 
 
+    &__remain {
+        font-size: 2.4rem;
+        font-style: italic;
+        color: $color-primary-bkDark;
+        padding-left: 3rem;
+    }
+
     &__task {
         // display: block;
         //待修改margin
@@ -80,14 +87,17 @@
                 // margin-bottom: 1.2rem;
                 & > i {
                     font-size: 2.4rem;
-                    margin-right: .9rem;
-                }
-                & > i:not(:first-child) {
+                    // margin-right: .9rem;
                     margin-right: 1.5rem;
                 }
+                // & > i:not(:first-child) {
+                    // margin-right: 1.5rem;
+                // }
                 & span {
-                    font-size: 1.5rem;
-                    margin-right: 1.5rem;
+                    font-size: 2.1rem;
+                    font-weight: 500;
+                    margin-left: .9rem;
+                    // margin-right: 1.5rem;
                 }
 
 
@@ -128,6 +138,7 @@
             &Input {
                 display: none;
                 border: none;
+                width: 60%;
                 font-size: 1.8rem;
                 padding: 1.2rem 0 1.2rem 1.2rem;
                 background: $color-primary-bkLight;
@@ -453,7 +464,7 @@
                 
                 &Input {
                     display: inline-block;
-                    color: #cd0000;
+                    
                 }
             }
             & .todolist__task__tag {

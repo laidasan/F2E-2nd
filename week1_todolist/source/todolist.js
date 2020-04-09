@@ -4,7 +4,8 @@
     let $todolistTasks = document.querySelectorAll('.todolist__task')
     // const $todolistTaskTags = document.querySelectorAll('.todolist__task__tag')
     const $todolistFormWrap = document.querySelectorAll('.todolist__task__formWrap')
-    const edit = 'todolist__task--edit'
+    const $header = document.querySelector('.header')
+
 
     let $taskHtml = `
     <div class="todolist__task__tag" data-index="1">
@@ -17,9 +18,7 @@
                     <span class="todolist__task__titleContent">title</span>
                     <input type="text" name="Title" placeholder="task title" class="todolist__task__titleInput">
                 </h4>
-                <div class="todolist__task__tagDescription">
-                    <i class="far fa-calendar-alt"></i><span>4/1</span>
-                </div>
+                <div class="todolist__task__tagDescription"></div>
             </div>
             <form action="" class="todolist__task__form">
                 <div class="todolist__task__formWrap deadline" data-type="Deadline">
@@ -40,8 +39,8 @@
                         File
                     </h5>
                     <div class="todolist__task__formGroup todolist__task__formGroup--2-1">
-                        <span class="todolist__task__form__fileInfo todolist__task__form__fileName"></span>
-                        <span class="todolist__task__form__fileInfo todolist__task__form__fileTime"></span>
+                        <span class="todolist__task__form__fileInfo todolist__task__form__fileName">filename</span>
+                        <span class="todolist__task__form__fileInfo todolist__task__form__fileTime">filetime</span>
                     </div>
                     <!--  for="UploadFile"  -->
                     <label class="todolist__task__formLabel todolist__task__formLabel--upload">
@@ -64,6 +63,9 @@
                 </div>
             </form>`
 
+
+    let iconDeadLine = 'far fa-calendar-alt' , iconFile = 'far fa-file' , iconDescription = 'far fa-comment-dots';
+    
 
     
     //task show description and file
@@ -96,24 +98,102 @@
         let istaskshow = parseInt($task.dataset['isshow'])
         console.log(wrap.querySelector('span').textContent)
         istaskshow && !isediting ? wrap.classList.add('show') : ''
+
+
+        //2020/4/8 未完成功能
+        //如果沒有deadline / file / description的話，該項在taskShow 詳細資訊的時候就不會跳出來
+        // istaskshow && !isediting ? (() => {
+        //     if(wrap.querySelector('.todolist__task__form__fileName') || wrap.querySelector('.todolist__task__formDescriptionShow')) {
+        //         wrap.querySelector('.todolist__task__form__fileName') ? wrap.querySelector('.todolist__task__form__fileName').textContent !== 'filename' ?  (() => {
+        //             wrap.classList.add('show')
+        //             wrap.style.removeProperty('max-height')
+        //         })() : wrap.style.setProperty('max-height','0') : ''
+        //         wrap.querySelector('.todolist__task__formDescriptionShow') ? wrap.querySelector('.todolist__task__formDescriptionShow').textContent ?  (() => {
+        //             wrap.classList.add('show')
+        //             wrap.style.removeProperty('max-height')
+        //         })() : wrap.style.setProperty('max-height','0') : ''
+        //     }
+        // })() : ''
+    }
+
+    //計算被標記"已完成"的task
+    function taskRemain() {
+        let remainMessage = document.querySelector('.todolist__remain')
+        $todolistTasks = document.querySelectorAll('.todolist__task')
+        let remainTask = $todolistTasks.length - 1
+        $todolistTasks.forEach(task => {
+            task.className.includes('complete') ? remainTask-- : ''
+        })  
+        remainMessage.textContent = `${remainTask} task left`
     }
 
     function enterAddTask(target,currentTarget) {
+        console.log('enter task')
         let $taskAdd = target.nextElementSibling
         $taskAdd.style.setProperty('display','block')
+        $taskAdd.dataset['isedit'] = 1
         target.style.setProperty('display','none')
     }
 
     //update task infomation
-    function updateTask(task) {
+    function updateTask(task,newTask) {
+        console.log('Update Task')
+        let now = new Date()
+        let taskForm = task.querySelector('form')
         let taskInputs = task.querySelectorAll('input')
-        let taskTitle = task.querySelector('.todolist__task__titleContent')
-        let tagDescription = task.querySelector('.todolist__task__tagDescription')
-        let taskFileName = task.querySelector('.todolist__task__form__fileName')
-        let taskFileTime = task.querySelector('.todolist__task__form__fileTime')
-        let taskDescription = task.querySelector('.todolist__task__formDescriptionShow')
-        console.log(taskInputs)
-        console.log(taskInputs[3].files)
+        let taskDescriptionInput = task.querySelector('textarea')
+        let taskTitle = newTask ? newTask.querySelector('.todolist__task__titleContent') : task.querySelector('todolist__task__titleContent')
+        let tagDescription = newTask ? newTask.querySelector('.todolist__task__tagDescription') : task.querySelector('.todolist__task__tagDescription')
+        let taskFileName = newTask ? newTask.querySelector('.todolist__task__form__fileName') : task.querySelector('.todolist__task__form__fileName')
+        let taskFileTime = newTask ? newTask.querySelector('.todolist__task__form__fileTime') : task.querySelector('.todolist__task__form__fileTime')
+        let taskDescriptionShow = newTask ? newTask.querySelector('.todolist__task__formDescriptionShow') : task.querySelector('.todolist__task__formDescriptionShow')
+        let taskFileUpload = newTask ? newTask.querySelector('.todolist__task__formUpload') : task.querySelector('.todolist__task__formUpload')
+        if(newTask) {
+            //if aadd newTask
+            // taskTitle = newTask.querySelector('.todolist__task__titleContent')
+            // tagDescription = newTask.querySelector('.todolist__task__tagDescription')
+            // taskFileName = newTask.querySelector('.todolist__task__form__fileName')
+            // taskFileTime = newTask.querySelector('.todolist__task__form__fileTime')
+            // taskDescriptionShow = newTask.querySelector('.todolist__task__formDescriptionShow')
+            taskInputs[1].value ? taskTitle.textContent = taskInputs[1].value : taskTitle.textContent = 'mission title'
+            taskInputs[3].files[0] ? taskFileName.textContent = taskInputs[3].files[0].name : ''
+            taskDescriptionShow.textContent = taskDescriptionInput.value
+            updateTagDes(tagDescription,taskInputs[2].value,taskInputs[3].files[0],taskDescriptionInput.value)
+
+            //maybe要處理檔案傳輸到後端
+            taskInputs[3].files[0] ? (() => {
+                let file = taskInputs[3].files.item(0)
+                taskFileName.textContent = taskInputs[3].files[0].name
+                taskFileTime.textContent = `${now.getFullYear()} / ${now.getMonth() + 1} / ${now.getDate()} / ${now.getHours()} : ${now.getMinutes()}`
+                taskFileUpload.files[0] = file
+            })() : ''
+        }else {
+            //edit old task
+
+        }
+
+        function updateTagDes(tagDes,deadlineTime,files,message) {
+            deadlineTime ? (() => {
+                let time = `${deadlineTime.split('-')[1]}/${deadlineTime.split('-')[2]}`
+                let deadLineIcon = document.createElement('i')
+                let span = document.createElement('span')
+                deadLineIcon.appendChild(span)
+                span.textContent = time
+                deadLineIcon.className = iconDeadLine
+                tagDes.appendChild(deadLineIcon)
+                console.log(deadlineTime.split('-'))
+            })() : ''
+            files ? (() => {
+                let fileIcon = document.createElement('i')
+                fileIcon.className = iconFile
+                tagDes.appendChild(fileIcon)
+            })() : ''
+            message ? (() => {
+                let messageIcon = document.createElement('i')
+                messageIcon.className = iconDescription
+                tagDes.appendChild(messageIcon)
+            })() : ''
+        }
     }
 
    
@@ -128,7 +208,7 @@
         let isTitleClick = target.matches ? target.matches('.todolist__task__title') : target.className.split(' ').find(classname => classname === 'todolist__task__title')
         let isFeatureWrap = target.matches ? target.matches('.todolist__task__tagFeature') : target.className.split(' ').find(classname => classname === 'todolist__task__tagFeature')
 
-        if(isTaskTagClick || isTitleClick || isFeatureWrap) {
+        if(isTaskTagClick || isTitleClick || isFeatureWrap && target.dataset['index'] !== 0) {
             // let $task = isTitleClick ? $todolistTasks[target.parentElement.dataset['index']] : $todolistTasks[target.dataset['index']]
             let $task = isTaskTagClick ? $todolistTasks[target.dataset['index']] : (() => {
                 return isTitleClick ? $todolistTasks[target.parentElement.dataset['index']] : $todolistTasks[target.parentElement.parentElement.dataset['index']]
@@ -142,14 +222,22 @@
     }
 
     //enter task edit mode
-    function taskEdit(target,currentTarget) {
+    function taskEdit(target,currentTarget,active) {
         console.log('taskEdit')
         let $task = $todolistTasks[target.dataset['index']]
         const $wraps = $task.querySelectorAll('.todolist__task__formWrap')
         let isediting = parseInt($task.dataset['isedit'])
 
         //如果index是0 => addTask的task and form
-        parseInt(target.dataset['index']) ? isediting ? escEdit() : enterEdit() : escAddTask()
+        parseInt(target.dataset['index']) ? isediting ? (() => {
+            if(active === 'edit') {
+                escEdit()
+            }else {
+                console.log('save change')
+                updateTask($task)
+                escEdit()
+            }
+        })() : enterEdit() : escAddTask()
 
         function enterEdit() {
             console.log('enter edit')
@@ -177,6 +265,7 @@
         console.log('taskStatus')
         let $task = target.parentElement.parentElement.parentElement
         target.checked ? $task.classList.add('complete') : $task.classList.remove('complete')
+        taskRemain();
     }
 
     function taskStar(target,currentTarget) {
@@ -210,19 +299,26 @@
         haveIndexEles.forEach(ele => ele.dataset['index'] = $todolistTasks.length)
         
         //update task infomation
-        updateTask($todolistTasks[0])
+        //2020/4/6
+        updateTask($todolistTasks[0],newTask)
+        console.log(newTask.querySelector('.todolist__task__formUpload').files)
 
-        currentTarget.appendChild(newTask)
+        // currentTarget.appendChild(newTask)
+        currentTarget.insertBefore(newTask,currentTarget.lastElementChild)
         $todolistTasks = document.querySelectorAll('.todolist__task')
-        // console.log($todolistTasks)
+        taskRemain()
         
 
         //close task add form
         let $task = target.parentElement.parentElement.parentElement
+        let $form = $task.querySelector('form')
         let $featureAdd = $task.previousElementSibling
         $task.style.removeProperty('display')
         $featureAdd.style.removeProperty('display')
+        $form.reset()
+        $task.querySelector('.todolist__task__titleInput').value = ''
     }
+
 
     function todolistClickHandler(e) {
         let target = e.target
@@ -231,7 +327,8 @@
         // console.log('active',active)
         switch(active) {
             case 'edit':
-                taskEdit(target,currentTarget)
+            case 'save':
+                taskEdit(target,currentTarget,active)
                 break;
             case 'show':
                 taskShow(target,currentTarget)
@@ -244,14 +341,12 @@
                 break;
             case 'add':
                 e.preventDefault()
-                console.log(e)
                 taskAdd(target,currentTarget)
                 break;
             default:
                 console.log('todolistClick')
                 break;
         }
-
 
 
         function checkActive(target) {
@@ -269,6 +364,7 @@
             target.getAttribute('type') === 'checkbox' ? active = 'status' : ''
             // console.log(target.getAttribute('value'))
             target.getAttribute('value') === 'add' ? active = 'add' : ''
+            target.getAttribute('value') === 'save' ? active = 'save' : ''
             // target.matches('edit') || target.className.includes('edit') ? active = 'edit' : active = 'show'
             // target.getAttribute('type') === 'checkbox' ? active = 'status' : ''
             // target.matches('feature-add') || target.className.includes('feature-add') ? active = '' : ''
@@ -277,16 +373,122 @@
     }
 
 
+
+    // change page
+    let lastActive = 'Task'
+    let thisActive = 'Task'
+    const pageContent = {
+        pageTask : '',
+        pageProcess : '',
+        pageComplete : ''
+    }
+
+    function getChangePageActive(clickTarget) {
+        let active = ''
+        switch (clickTarget.dataset['active']) {
+           case 'task':
+               active = 'Task'
+               break;
+           case 'process':
+               active = 'Process'
+               break;
+           case 'complete':
+               active= 'Complete'
+               break;
+           default:
+               console.log('get active')
+               break;
+       }
+        return active
+    }
+
+
+    // 2020/4/9 change page 功能尚未完成
+    function chage(e,active) {
+        console.log('change')
+        if(active === lastActive) {return}
+        lastActive = thisActive
+        thisActive = active
+        // console.log(pageContent['pageTask'])
+
+        if(pageContent[`page${thisActive}`] === '') {
+            console.log('first change to this page')
+            //這裡可以一在網頁讀取的時候做
+            //但可能會耗效能與進網頁速率
+            switch (thisActive) {
+                case 'Task':
+                    changeToTask(e)
+                    break;
+                case 'Process':
+                    changeToProcess(e)
+                    break;
+                case 'Complete':
+                    changeToComplete(e)
+                    break;
+            }
+        }else {
+            console.log('change Page')
+            pageContent[`page${lastActive}`] = $todolist.innerHTML
+            $todolist.innerHTML = pageContent[`page${thisActive}`]
+
+
+            // $addTaskBtn = document.querySelector('.feature-add')
+            // $todolist = document.querySelector('.todolist');
+            // $todolistTasks = document.querySelectorAll('.todolist__task')
+            // $todolistFormWrap = document.querySelectorAll('.todolist__task__formWrap')
+            // addEventListen()
+        }
+    }
+
+    function changePage(e) {
+        e.preventDefault()
+        let target  = e.target
+        let isChange = target.matches ? target.matches('.nav__option') : target.className.includes('nav__option') 
+        if(isChange) {
+            let active = getChangePageActive(target)
+            chage(e,active)
+        }
+    }
+
+
+    function changeToTask(e) {
+        $todolist.innerHTML = ''
+    }
+    
+    function changeToComplete(e) {
+        $todolist.innerHTML = ''
+    }
+    function changeToProcess(e) {
+        $todolist.innerHTML = ''
+
+    }
+   
+
+    function addEventListen() {
+        $todolist.addEventListener('click',e => { todolistClickHandler(e) })
+        $addTaskBtn.addEventListener('click',e => enterAddTask(e.target,e.currentTarget))
+        $header.addEventListener('click',e => changePage(e))
+    
+        $todolistFormWrap.forEach(wrap => {
+            if(wrap.dataset['type'] === 'Deadline'){return}
+            wrap.addEventListener("transitionend",e => formWrapShow(e))
+        })
+    }
  
-
-    $todolist.addEventListener('click',e => { todolistClickHandler(e) })
-    $addTaskBtn.addEventListener('click',e => enterAddTask(e.target,e.currentTarget))
-
-
-    $todolistFormWrap.forEach(wrap => {
-        if(wrap.dataset['type'] === 'Deadline'){return}
-        wrap.addEventListener("transitionend",e => formWrapShow(e))
-    })
+    
+    window.onload = function () {
+        // $todolist.addEventListener('click',e => { todolistClickHandler(e) })
+        // $addTaskBtn.addEventListener('click',e => enterAddTask(e.target,e.currentTarget))
+        // $header.addEventListener('click',e => changePage(e))
+    
+        // $todolistFormWrap.forEach(wrap => {
+        //     if(wrap.dataset['type'] === 'Deadline'){return}
+        //     wrap.addEventListener("transitionend",e => formWrapShow(e))
+        // })
+        addEventListen()
+        taskRemain()
+        pageContent['pageTask'] = $todolist.innerHTML
+    }
     // $todolistFormWrap.forEach(wrap => {
     //     if(wrap.dataset['type'] === 'Deadline'){return}
     //     let $task = wrap.parentElement.parentElement

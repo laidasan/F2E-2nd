@@ -1,5 +1,5 @@
 html {
-  font-family: 'Noto Sans TC', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 62.5%;
   overflow-y: scroll; }
 
@@ -60,6 +60,11 @@ body {
   min-width: 32.5rem;
   max-width: 96rem;
   margin: 1.2rem auto; }
+  .todolist__remain {
+    font-size: 2.4rem;
+    font-style: italic;
+    color: #c8c8c8;
+    padding-left: 3rem; }
   .todolist__task {
     margin-bottom: 3.6rem;
     position: relative;
@@ -107,12 +112,11 @@ body {
         padding-left: 4rem; }
         .todolist__task__tagDescription > i {
           font-size: 2.4rem;
-          margin-right: .9rem; }
-        .todolist__task__tagDescription > i:not(:first-child) {
           margin-right: 1.5rem; }
         .todolist__task__tagDescription span {
-          font-size: 1.5rem;
-          margin-right: 1.5rem; }
+          font-size: 2.1rem;
+          font-weight: 500;
+          margin-left: .9rem; }
     .todolist__task__title {
       font-size: 2.4rem;
       border-radius: 6px;
@@ -124,6 +128,7 @@ body {
       .todolist__task__titleInput {
         display: none;
         border: none;
+        width: 60%;
         font-size: 1.8rem;
         padding: 1.2rem 0 1.2rem 1.2rem;
         background: #f2f2f2; }
@@ -304,8 +309,7 @@ body {
     .todolist__task.edit .todolist__task__titleContent {
       display: none; }
     .todolist__task.edit .todolist__task__titleInput {
-      display: inline-block;
-      color: #cd0000; }
+      display: inline-block; }
     .todolist__task.edit .todolist__task__tag {
       padding-bottom: 2.4rem; }
       .todolist__task.edit .todolist__task__tag::after {
