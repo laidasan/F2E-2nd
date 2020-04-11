@@ -7,8 +7,19 @@ function formWrapShow(e) {
     let $task = wrap.parentElement.parentElement
     let isediting = parseInt($task.dataset['isedit'])
     let istaskshow = parseInt($task.dataset['isshow'])
-    console.log(wrap.querySelector('span').textContent)
     istaskshow && !isediting ? wrap.classList.add('show') : ''
+}
+
+
+//計算被標記"已完成"的task
+function taskRemain() {
+    let remainMessage = document.querySelector('.todolist__remain')
+    $todolistTasks = document.querySelectorAll('.todolist__task')
+    let remainTask = $todolistTasks.length - 1
+    $todolistTasks.forEach(task => {
+        task.className.includes('complete') ? remainTask-- : ''
+    })  
+    remainMessage.textContent = `${remainTask} task left`
 }
 
 function todolistClickHandler(e) {
@@ -20,7 +31,7 @@ function todolistClickHandler(e) {
     switch(active) {
         case 'edit':
         case 'save':
-            // taskEdit(target,currentTarget,active)
+            todolistObj.taskEdit(target,currentTarget,active)
             console.log('edit,save')
             break;
         case 'show':
@@ -29,11 +40,11 @@ function todolistClickHandler(e) {
             break;
         case 'status':
             console.log('status')
-            // taskStatus(target,currentTarget)
+            todolistObj.taskStatus(target,currentTarget)
             break;
         case 'star':
             console.log('star')
-            // taskStar(target,currentTarget)
+            todolistObj.taskStar(target,currentTarget)
             break;
         case 'add':
             console.log('add')
@@ -68,5 +79,6 @@ function todolistClickHandler(e) {
 window.onload = function() {
     todolistObj.addListener(todolistObj.todolist,'click',todolistClickHandler)
     todolistObj.addListener(todolistObj.formWraps,'transitionend',formWrapShow)
+    taskRemain()
 }
 

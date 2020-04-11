@@ -21,6 +21,16 @@
         return this.tasks
     }
 
+    todolist.prototype.taskRemain = function () {
+        let remainMessage = document.querySelector('.todolist__remain')
+        $todolistTasks = document.querySelectorAll('.todolist__task')
+        let remainTask = $todolistTasks.length - 1
+        $todolistTasks.forEach(task => {
+        task.className.includes('complete') ? remainTask-- : ''
+        })  
+        remainMessage.textContent = `${remainTask} task left`
+    }
+
 
     todolist.prototype.taskShow = function (target,currentTarget) {
         console.log('task show')
@@ -96,18 +106,71 @@
     todolist.prototype.addListener = function (element,active,handler) {
         let isElements = element instanceof Array || element instanceof NodeList
         if(element && typeof active === 'string' && typeof handler === 'function') {
-            // if(element instanceof Array || element instanceof NodeList) {
-
-            // }else {
-            //     element.addEventListener(active,e => handler(e) )
-            // }
-            isElements ?  element.forEach(ele => ele.addEventListener(active, e => handler(e))) : element.addEventListener(active,e => handler(e)) 
-            
+            isElements ?  element.forEach(ele => ele.addEventListener(active, e => handler(e))) : element.addEventListener(active,e => handler(e))    
         }
-        
         return this
     }
 
+    todolist.prototype.taskEdit = function (target,currentTarget,active){
+        let $task = this.tasks[target.dataset['index']]
+        const $wraps = $task.querySelectorAll('.todolist__task__formWrap')
+        let isediting = parseInt($task.dataset['isedit'])
+
+        // 如果index是0 = addTask的task and form
+        // 2020 / 4 / 12 這裡的updateTask方法還沒出來
+        // 還沒有時值上的修改
+        parseInt(target.dataset['index']) ? isediting ? (() => {
+            if(active === 'edit') {
+                escEdit()
+            }else {
+                console.log('save change')
+                updateTask($task)
+                escEdit()
+            }
+        })() : enterEdit() : escAddTask()
+
+        function enterEdit() {
+            console.log('enter edit')
+            $task.dataset['isedit'] = 1
+            $task.classList.add('edit')
+            $wraps.forEach(wrap => wrap.classList.remove('show'))
+        }
+
+        function escEdit() {
+            console.log('esc edit')
+            $task.dataset['isedit'] = 0
+            $task.classList.remove('edit')
+        }
+
+        function escAddTask() {
+            $task.style.removeProperty('display')
+            $task.previousElementSibling.style.removeProperty('display')
+            console.log($task.previousElementSibling)
+        }
+    }
+
+    todolist.prototype.taskStatus = function (target,currentTarget) {
+        console.log('taskStatus')
+        let $task = target.parentElement.parentElement.parentElement
+        target.checked ? $task.classList.add('complete') : $task.classList.remove('complete')
+        this.taskRemain();
+    }
+
+    todolist.prototype.taskStar = function (target,currentTarget) {
+        let $task = this.tasks[target.dataset['index']]
+        if(parseInt(target.dataset['index'])) {
+            if(!$task.style.order) {
+                target.classList.add('fas')
+                target.style.setProperty('color','#f5a623')
+                $task.style.setProperty('order','-1')
+            }else {
+                target.classList.remove('fas')
+                target.style.removeProperty('color')
+                $task.style.removeProperty('order')
+
+            }
+        }
+    }
     todolist.prototype.init = function() {
 
     }
