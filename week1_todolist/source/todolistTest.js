@@ -2,6 +2,15 @@ const $todolist = document.querySelector('.todolist')
 let todolistObj = new todolist($todolist)
 
 
+function formWrapShow(e) {
+    let wrap = e.target
+    let $task = wrap.parentElement.parentElement
+    let isediting = parseInt($task.dataset['isedit'])
+    let istaskshow = parseInt($task.dataset['isshow'])
+    console.log(wrap.querySelector('span').textContent)
+    istaskshow && !isediting ? wrap.classList.add('show') : ''
+}
+
 function todolistClickHandler(e) {
     console.log('todolist click')
     let target = e.target
@@ -57,8 +66,7 @@ function todolistClickHandler(e) {
 }
 
 window.onload = function() {
-    // todolistObj
-    // console.log(todolistObj.tasks)
-    todolistObj.addListener(todolistObj.todolist,'click',this.todolistClickHandler)
+    todolistObj.addListener(todolistObj.todolist,'click',todolistClickHandler)
+    todolistObj.addListener(todolistObj.formWraps,'transitionend',formWrapShow)
 }
 

@@ -14,7 +14,7 @@
         return this
     }
 
-    todolist.prototype.updateTask = function (todolist) {
+    todolist.prototype.updateTodolist = function (todolist) {
         todolist && todolist.nodeType === 1 ? this.todolist = todolist : ''
         this.tasks = this.todolist.querySelectorAll('.todolist__task')
         this.formWraps = this.todolist.querySelectorAll('.todolist__task__formWrap')
@@ -94,12 +94,15 @@
     }
 
     todolist.prototype.addListener = function (element,active,handler) {
-        // this.todolist.addEventListener('click',(e) => {
-            // console.log('click')
-        // })
-
+        let isElements = element instanceof Array || element instanceof NodeList
         if(element && typeof active === 'string' && typeof handler === 'function') {
-            element.addEventListener(active,e => handler(e) )
+            // if(element instanceof Array || element instanceof NodeList) {
+
+            // }else {
+            //     element.addEventListener(active,e => handler(e) )
+            // }
+            isElements ?  element.forEach(ele => ele.addEventListener(active, e => handler(e))) : element.addEventListener(active,e => handler(e)) 
+            
         }
         
         return this
