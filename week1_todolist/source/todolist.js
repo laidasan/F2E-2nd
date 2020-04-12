@@ -69,35 +69,35 @@
 
     
     //task show description and file
-    function show($task,$wraps) {
-        console.log('task show')
-        $task.classList.add('show')
-        $task.dataset['isshow'] = 1
-        $wraps.forEach(wrap => {
-            if(wrap.matches('.deadline')){return}
-            wrap.style.setProperty('position','static')
-        })
-    }
+    // function show($task,$wraps) {
+    //     console.log('task show')
+    //     $task.classList.add('show')
+    //     $task.dataset['isshow'] = 1
+    //     $wraps.forEach(wrap => {
+    //         if(wrap.matches('.deadline')){return}
+    //         wrap.style.setProperty('position','static')
+    //     })
+    // }
 
     //task hidden description and file
-    function hidden($task,$wraps) {
-        console.log('task hidden')
-        $wraps.forEach(wrap => {
-            wrap.classList.remove('show')
-            wrap.style.removeProperty('position')
-        })
-        $task.classList.remove('show')
-        $task.dataset['isshow'] = 0
-    }
+    // function hidden($task,$wraps) {
+    //     console.log('task hidden')
+    //     $wraps.forEach(wrap => {
+    //         wrap.classList.remove('show')
+    //         wrap.style.removeProperty('position')
+    //     })
+    //     $task.classList.remove('show')
+    //     $task.dataset['isshow'] = 0
+    // }
 
     //wrap transitionend show
-    function formWrapShow(e) {
-        let wrap = e.target
-        let $task = wrap.parentElement.parentElement
-        let isediting = parseInt($task.dataset['isedit'])
-        let istaskshow = parseInt($task.dataset['isshow'])
-        console.log(wrap.querySelector('span').textContent)
-        istaskshow && !isediting ? wrap.classList.add('show') : ''
+    // function formWrapShow(e) {
+    //     let wrap = e.target
+    //     let $task = wrap.parentElement.parentElement
+    //     let isediting = parseInt($task.dataset['isedit'])
+    //     let istaskshow = parseInt($task.dataset['isshow'])
+    //     console.log(wrap.querySelector('span').textContent)
+    //     istaskshow && !isediting ? wrap.classList.add('show') : ''
 
 
         //2020/4/8 未完成功能
@@ -114,18 +114,18 @@
         //         })() : wrap.style.setProperty('max-height','0') : ''
         //     }
         // })() : ''
-    }
+    // }
 
     //計算被標記"已完成"的task
-    function taskRemain() {
-        let remainMessage = document.querySelector('.todolist__remain')
-        $todolistTasks = document.querySelectorAll('.todolist__task')
-        let remainTask = $todolistTasks.length - 1
-        $todolistTasks.forEach(task => {
-            task.className.includes('complete') ? remainTask-- : ''
-        })  
-        remainMessage.textContent = `${remainTask} task left`
-    }
+    // function taskRemain() {
+    //     let remainMessage = document.querySelector('.todolist__remain')
+    //     $todolistTasks = document.querySelectorAll('.todolist__task')
+    //     let remainTask = $todolistTasks.length - 1
+    //     $todolistTasks.forEach(task => {
+    //         task.className.includes('complete') ? remainTask-- : ''
+    //     })  
+    //     remainMessage.textContent = `${remainTask} task left`
+    // }
 
     function enterAddTask(target,currentTarget) {
         console.log('enter task')
@@ -199,90 +199,90 @@
    
 
     //click -> show description and file 
-    function taskShow(target,currentTarget) {
-        console.log('taskShowOrHidden')
-        // let $task = currentTarget.firstElementChild
+    // function taskShow(target,currentTarget) {
+    //     console.log('taskShowOrHidden')
+    //     // let $task = currentTarget.firstElementChild
 
-        //taskTag Click 或是 task__title Click的時候可以觸發Click
-        let isTaskTagClick = target.matches ? target.matches('.todolist__task__tag') : target.className.match(/^todolist__task__tag$/)
-        let isTitleClick = target.matches ? target.matches('.todolist__task__title') : target.className.split(' ').find(classname => classname === 'todolist__task__title')
-        let isFeatureWrap = target.matches ? target.matches('.todolist__task__tagFeature') : target.className.split(' ').find(classname => classname === 'todolist__task__tagFeature')
+    //     //taskTag Click 或是 task__title Click的時候可以觸發Click
+    //     let isTaskTagClick = target.matches ? target.matches('.todolist__task__tag') : target.className.match(/^todolist__task__tag$/)
+    //     let isTitleClick = target.matches ? target.matches('.todolist__task__title') : target.className.split(' ').find(classname => classname === 'todolist__task__title')
+    //     let isFeatureWrap = target.matches ? target.matches('.todolist__task__tagFeature') : target.className.split(' ').find(classname => classname === 'todolist__task__tagFeature')
 
-        if(isTaskTagClick || isTitleClick || isFeatureWrap && target.dataset['index'] !== 0) {
-            // let $task = isTitleClick ? $todolistTasks[target.parentElement.dataset['index']] : $todolistTasks[target.dataset['index']]
-            let $task = isTaskTagClick ? $todolistTasks[target.dataset['index']] : (() => {
-                return isTitleClick ? $todolistTasks[target.parentElement.dataset['index']] : $todolistTasks[target.parentElement.parentElement.dataset['index']]
-            })()
+    //     if(isTaskTagClick || isTitleClick || isFeatureWrap && target.dataset['index'] !== 0) {
+    //         // let $task = isTitleClick ? $todolistTasks[target.parentElement.dataset['index']] : $todolistTasks[target.dataset['index']]
+    //         let $task = isTaskTagClick ? $todolistTasks[target.dataset['index']] : (() => {
+    //             return isTitleClick ? $todolistTasks[target.parentElement.dataset['index']] : $todolistTasks[target.parentElement.parentElement.dataset['index']]
+    //         })()
 
-            const $wraps = $task.querySelectorAll('.todolist__task__formWrap')
-            let isshowing = parseInt($task.dataset['isshow'])
-            let isediting = parseInt($task.dataset['isedit'])
-            isediting ? '' : isshowing ? hidden($task,$wraps) : show($task,$wraps)
-        }
-    }
+    //         const $wraps = $task.querySelectorAll('.todolist__task__formWrap')
+    //         let isshowing = parseInt($task.dataset['isshow'])
+    //         let isediting = parseInt($task.dataset['isedit'])
+    //         isediting ? '' : isshowing ? hidden($task,$wraps) : show($task,$wraps)
+    //     }
+    // }
 
     //enter task edit mode
-    function taskEdit(target,currentTarget,active) {
-        console.log('taskEdit')
-        let $task = $todolistTasks[target.dataset['index']]
-        const $wraps = $task.querySelectorAll('.todolist__task__formWrap')
-        let isediting = parseInt($task.dataset['isedit'])
+    // function taskEdit(target,currentTarget,active) {
+    //     console.log('taskEdit')
+    //     let $task = $todolistTasks[target.dataset['index']]
+    //     const $wraps = $task.querySelectorAll('.todolist__task__formWrap')
+    //     let isediting = parseInt($task.dataset['isedit'])
 
-        //如果index是0 => addTask的task and form
-        parseInt(target.dataset['index']) ? isediting ? (() => {
-            if(active === 'edit') {
-                escEdit()
-            }else {
-                console.log('save change')
-                updateTask($task)
-                escEdit()
-            }
-        })() : enterEdit() : escAddTask()
+    //     //如果index是0 => addTask的task and form
+    //     parseInt(target.dataset['index']) ? isediting ? (() => {
+    //         if(active === 'edit') {
+    //             escEdit()
+    //         }else {
+    //             console.log('save change')
+    //             updateTask($task)
+    //             escEdit()
+    //         }
+    //     })() : enterEdit() : escAddTask()
 
-        function enterEdit() {
-            console.log('enter edit')
-            $task.dataset['isedit'] = 1
-            $task.classList.add('edit')
-            $wraps.forEach(wrap => wrap.classList.remove('show'))
-        }
+    //     function enterEdit() {
+    //         console.log('enter edit')
+    //         $task.dataset['isedit'] = 1
+    //         $task.classList.add('edit')
+    //         $wraps.forEach(wrap => wrap.classList.remove('show'))
+    //     }
 
-        function escEdit() {
-            console.log('esc edit')
-            $task.dataset['isedit'] = 0
-            $task.classList.remove('edit')
-        }
+    //     function escEdit() {
+    //         console.log('esc edit')
+    //         $task.dataset['isedit'] = 0
+    //         $task.classList.remove('edit')
+    //     }
 
-        function escAddTask() {
-            $task.style.removeProperty('display')
-            $task.previousElementSibling.style.removeProperty('display')
-            console.log($task.previousElementSibling)
-        }
+    //     function escAddTask() {
+    //         $task.style.removeProperty('display')
+    //         $task.previousElementSibling.style.removeProperty('display')
+    //         console.log($task.previousElementSibling)
+    //     }
         
-    }
+    // }
 
     //change task status(finish or not)
-    function taskStatus(target,currentTarget) {
-        console.log('taskStatus')
-        let $task = target.parentElement.parentElement.parentElement
-        target.checked ? $task.classList.add('complete') : $task.classList.remove('complete')
-        taskRemain();
-    }
+    // function taskStatus(target,currentTarget) {
+    //     console.log('taskStatus')
+    //     let $task = target.parentElement.parentElement.parentElement
+    //     target.checked ? $task.classList.add('complete') : $task.classList.remove('complete')
+    //     taskRemain();
+    // }
 
-    function taskStar(target,currentTarget) {
-        let $task = $todolistTasks[target.dataset['index']]
-        if(parseInt(target.dataset['index'])) {
-            if(!$task.style.order) {
-                target.classList.add('fas')
-                target.style.setProperty('color','#f5a623')
-                $task.style.setProperty('order','-1')
-            }else {
-                target.classList.remove('fas')
-                target.style.removeProperty('color')
-                $task.style.removeProperty('order')
+    // function taskStar(target,currentTarget) {
+    //     let $task = $todolistTasks[target.dataset['index']]
+    //     if(parseInt(target.dataset['index'])) {
+    //         if(!$task.style.order) {
+    //             target.classList.add('fas')
+    //             target.style.setProperty('color','#f5a623')
+    //             $task.style.setProperty('order','-1')
+    //         }else {
+    //             target.classList.remove('fas')
+    //             target.style.removeProperty('color')
+    //             $task.style.removeProperty('order')
 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 
     function taskAdd(target,currentTarget) {
         console.log('task add')
@@ -320,60 +320,60 @@
     }
 
 
-    function todolistClickHandler(e) {
-        let target = e.target
-        let currentTarget = e.currentTarget
-        let active  = checkActive(target,currentTarget)
-        // console.log('active',active)
-        switch(active) {
-            case 'edit':
-            case 'save':
-                taskEdit(target,currentTarget,active)
-                break;
-            case 'show':
-                taskShow(target,currentTarget)
-                break;
-            case 'status':
-                taskStatus(target,currentTarget)
-                break;
-            case 'star': 
-                taskStar(target,currentTarget)
-                break;
-            case 'add':
-                e.preventDefault()
-                taskAdd(target,currentTarget)
-                break;
-            default:
-                console.log('todolistClick')
-                break;
-        }
+    // function todolistClickHandler(e) {
+    //     let target = e.target
+    //     let currentTarget = e.currentTarget
+    //     let active  = checkActive(target,currentTarget)
+    //     // console.log('active',active)
+    //     switch(active) {
+    //         case 'edit':
+    //         case 'save':
+    //             taskEdit(target,currentTarget,active)
+    //             break;
+    //         case 'show':
+    //             taskShow(target,currentTarget)
+    //             break;
+    //         case 'status':
+    //             taskStatus(target,currentTarget)
+    //             break;
+    //         case 'star': 
+    //             taskStar(target,currentTarget)
+    //             break;
+    //         case 'add':
+    //             e.preventDefault()
+    //             taskAdd(target,currentTarget)
+    //             break;
+    //         default:
+    //             console.log('todolistClick')
+    //             break;
+    //     }
 
 
-        function checkActive(target) {
-            let active = ''
-            if(target.matches) {
-                console.log('support matches')
-                target.matches('.edit') || target.value === 'cancel' ? active = 'edit' : active = 'show'
-                target.matches('.star') ? active = 'star' : ''
-                target.matches('.feature-add') ? active = '' : ''
-            }else {
-                target.className.includes('edit') ? active = 'edit' : active = 'show'
-                target.className.includes('star') ? active = 'star' : ''
-                target.className.includes('feature-add') ? active = '' : ''
-            }
-            target.getAttribute('type') === 'checkbox' ? active = 'status' : ''
-            // console.log(target.getAttribute('value'))
-            target.getAttribute('value') === 'add' ? active = 'add' : ''
-            target.getAttribute('value') === 'save' ? active = 'save' : ''
-            // target.matches('edit') || target.className.includes('edit') ? active = 'edit' : active = 'show'
-            // target.getAttribute('type') === 'checkbox' ? active = 'status' : ''
-            // target.matches('feature-add') || target.className.includes('feature-add') ? active = '' : ''
-            return active
-        }
-    }
+    //     function checkActive(target) {
+    //         let active = ''
+    //         if(target.matches) {
+    //             console.log('support matches')
+    //             target.matches('.edit') || target.value === 'cancel' ? active = 'edit' : active = 'show'
+    //             target.matches('.star') ? active = 'star' : ''
+    //             target.matches('.feature-add') ? active = '' : ''
+    //         }else {
+    //             target.className.includes('edit') ? active = 'edit' : active = 'show'
+    //             target.className.includes('star') ? active = 'star' : ''
+    //             target.className.includes('feature-add') ? active = '' : ''
+    //         }
+    //         target.getAttribute('type') === 'checkbox' ? active = 'status' : ''
+    //         // console.log(target.getAttribute('value'))
+    //         target.getAttribute('value') === 'add' ? active = 'add' : ''
+    //         target.getAttribute('value') === 'save' ? active = 'save' : ''
+    //         // target.matches('edit') || target.className.includes('edit') ? active = 'edit' : active = 'show'
+    //         // target.getAttribute('type') === 'checkbox' ? active = 'status' : ''
+    //         // target.matches('feature-add') || target.className.includes('feature-add') ? active = '' : ''
+    //         return active
+    //     }
+    // }
 
 
-
+// -----------------------------------------------------------------------
     // change page
     let lastActive = 'Task'
     let thisActive = 'Task'

@@ -1,5 +1,7 @@
 const $todolist = document.querySelector('.todolist')
-let todolistObj = new todolist($todolist)
+const $addTaskBtn = document.querySelector('.feature-add')
+const $formWraps = document.querySelectorAll('.todolist__task__formWrap')
+let todolistObj = new todolist($todolist).init()
 
 
 function formWrapShow(e) {
@@ -49,7 +51,7 @@ function todolistClickHandler(e) {
         case 'add':
             console.log('add')
             e.preventDefault()
-            // taskAdd(target,currentTarget)
+            todolistObj.taskAdd(target,currentTarget)
             break;
         default:
             console.log('todolistClick')
@@ -76,9 +78,13 @@ function todolistClickHandler(e) {
     }
 }
 
+
+
 window.onload = function() {
-    todolistObj.addListener(todolistObj.todolist,'click',todolistClickHandler)
-    todolistObj.addListener(todolistObj.formWraps,'transitionend',formWrapShow)
+    todolistObj.addListener($todolist,'click',todolistClickHandler)
+    todolistObj.addListener($addTaskBtn,'click',todolistObj.enterAddTask)
+    // todolistObj.addListener($formWraps,'transitionend',formWrapShow)
+    todolistObj.addListener($formWraps,'transitionend',todolistObj.formWrapShow)
     taskRemain()
 }
 
